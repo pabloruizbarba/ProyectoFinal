@@ -23,7 +23,7 @@ class Devices(models.Model):
     id_device = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     code = models.CharField(max_length=50)
-    id_playlist = models.ForeignKey('Playlists', models.DO_NOTHING, db_column='id_playlist')
+    id_playlist = models.ForeignKey('Playlists', models.DO_NOTHING, db_column='id_playlist', blank=True, null=True)
 
     class Meta:
         managed = False

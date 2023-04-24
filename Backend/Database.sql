@@ -53,7 +53,7 @@ CREATE TABLE `Devices` (
   `id_device` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `code` varchar(50) NOT NULL,
-  `id_playlist` int(11) NOT NULL,
+  `id_playlist` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_device`),
   KEY `id_playlist` (`id_playlist`),
   CONSTRAINT `Devices_ibfk_1` FOREIGN KEY (`id_playlist`) REFERENCES `Playlists` (`id_playlist`)
@@ -128,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-21 14:36:34
+-- Dump completed on 2023-04-24 12:55:45
