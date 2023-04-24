@@ -5,7 +5,7 @@ info:
     Api for Inusual Player
   version: "1.0"
 paths:
-  /v1/files:
+  /v1/add-file:
     post:
       tags:
         - files
@@ -45,7 +45,7 @@ paths:
               description: Filename already exists
   
   
-  /v1/playlists:
+  /v1/add-playlist:
     post:
       tags:
         - playlists
@@ -72,7 +72,7 @@ paths:
             '409':
               description: playlist already exists
   
-  /v1/devices:
+  /v1/add-device:
     post:
       tags:
         - devices
