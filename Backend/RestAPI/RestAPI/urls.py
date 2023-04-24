@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+import webserviceapp.views as views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Devices
+    path('v1/add-device', views.add_device),
 ]
