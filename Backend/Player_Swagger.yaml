@@ -1,0 +1,375 @@
+openapi: 3.0.3
+info:
+  title: Player swagger
+  description: |-
+    Api for Inusual Player
+  version: "1.0"
+paths:
+  /v1/files:
+    post:
+      tags:
+        - files
+      summary: Add a new file
+      description: Add a new file
+      parameters: 
+        - name: filename
+          in: query
+          description: The name of the new file
+          required: true
+          schema: 
+            type: string
+        - name: type
+          in: query
+          description: The type of the new file
+          required: true
+          schema: 
+            type: string
+        - name: hash_file
+          in: query
+          description: The hash of the new file
+          required: true
+          schema: 
+            type: string
+        - name: path
+          in: query
+          description: The path of the new file
+          required: true
+          schema: 
+            type: string
+      responses:
+            '201':
+              description: Created
+            '400':
+              description: Bad Request - Forget or incorrect params
+            '409':
+              description: Filename already exists
+  
+  
+  /v1/playlists:
+    post:
+      tags:
+        - playlists
+      summary: create a new playlist
+      description: create a new playlist
+      parameters: 
+        - name: title
+          in: query
+          description: The title of the new playlist
+          required: true
+          schema: 
+            type: string
+        - name: hash_list
+          in: query
+          description: The hash of the new playlist
+          required: true
+          schema: 
+            type: string
+      responses:
+            '201':
+              description: Created
+            '400':
+              description: Bad Request - Forget or incorrect params
+            '409':
+              description: playlist already exists
+  
+  /v1/devices:
+    post:
+      tags:
+        - devices
+      summary: add a device
+      description: add a device
+      parameters: 
+        - name: name
+          in: query
+          description: The name of the new device
+          required: true
+          schema: 
+            type: string
+        - name: code
+          in: query
+          description: The code of the new device
+          required: true
+          schema: 
+            type: string
+        - name: id_playlist
+          in: query
+          description: ID of the playlist
+          required: false
+          schema: 
+            type: integer
+      responses:
+            '201':
+              description: Created
+            '400':
+              description: Bad Request - Forget or incorrect params
+            '409':
+              description: Device already exists            
+  /v1/assign-file:
+    post:
+      tags:
+        - assign file to playlist
+      summary: add a file to a playlist
+      description: add a file to a playlist
+      parameters: 
+        - name: id_playlist
+          in: query
+          description: ID of the playlist
+          required: true
+          schema: 
+            type: integer
+        - name: id_file
+          in: query
+          description: ID of the file
+          required: true
+          schema: 
+            type: integer
+        - name: duration
+          in: query
+          description: duration of the file(optional)
+          required: true
+          schema: 
+            type: integer
+      responses:
+            '201':
+              description: Ok done
+            '400':
+              description: Bad Request - Forget or incorrect params
+            '409':
+              description: Already assigned
+  
+  /v1/assign-playlist:
+    post:
+      tags:
+        - assign playlist to device
+      summary: add a playlist to a device
+      description: add a playlist to a device
+      parameters: 
+        - name: id_device
+          in: query
+          description: ID of the device
+          required: true
+          schema: 
+            type: integer
+        - name: id_playlist
+          in: query
+          description: ID of the playlist
+          required: true
+          schema: 
+            type: integer
+      responses:
+            '201':
+              description: Ok done
+            '400':
+              description: Bad Request - Forget or incorrect params
+            '409':
+              description: Already assigned 
+      
+  /v1/view-devices:
+    get:
+      tags:
+        - devices
+      summary: Get list of devices
+      description: Get list of devices
+      responses: 
+            '200':
+              description: Devices gotten
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Show-devices' 
+            '404':
+              description: Not found
+              
+  /v1/view-files:
+    get:
+      tags:
+        - files
+      summary: Get list of media files
+      description: Get list of media files
+      responses:
+            '200':
+              description: Devices gotten
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Show-files' 
+            '404':
+              description: Not found
+              
+  /v1/view-playlists:
+    get:
+      tags:
+        - playlists
+      summary: Get list of playlists
+      description: Get list of playlists
+      responses:
+            '200':
+              description: playlists gotten
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Show-playlists' 
+            '404':
+              description: Not found   
+              
+  /v1/view-assigned-file/{id_playlist}:
+    get:
+      tags:
+        - playlists
+      summary: Get list of files from a playlist
+      description: Get list of files from a playlist
+      parameters:
+        - name: id_playlist
+          in: path
+          description: ID of the playlist
+          required: true
+          schema:
+            type: string
+      responses:
+            '200':
+              description: assigned files gotten
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Show-assigned-file' 
+            '404':
+              description: Not found    
+              
+  /v1/view-assigned-playlist/{id_device}:
+    get:
+      tags:
+        - devices
+      summary: Get the playlist of a device
+      description: Get the playlist of a device
+      parameters:
+        - name: id_device
+          in: path
+          description: ID of the device
+          required: true
+          schema:
+            type: string
+      responses:
+            '200':
+              description: assigned playlist gotten
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Show-assigned-playlist' 
+            '404':
+              description: Not found            
+          
+  /v1/delete-file/{id_file}:
+    delete:
+      tags: 
+        - files
+      summary: Delete a file
+      description: Delete a file
+      parameters:
+        - name:  id_file
+          in: path
+          description: ID of file to be deleted
+          required: true
+          schema: 
+            type: integer
+      responses:
+            '200':
+              description: deleted succesfully
+            '404':
+              description: Not found
+              
+  /v1/delete-playlist/{id_playlist}:
+    delete:
+      tags: 
+        - playlists
+      summary: Delete a file
+      description: Delete a file
+      parameters:
+        - name:  id_playlist
+          in: path
+          description: ID of playlist to be deleted
+          required: true
+          schema: 
+            type: integer
+      responses:
+            '200':
+              description: deleted succesfully
+            '404':
+              description: Not found
+  
+  /v1/delete-device/{id_device}:
+    delete:
+      tags: 
+        - devices
+      summary: Delete a device
+      description: Delete a device
+      parameters:
+        - name:  id_device
+          in: path
+          description: ID of device to be deleted
+          required: true
+          schema: 
+            type: integer
+      responses:
+            '200':
+              description: deleted succesfully
+            '404':
+              description: Not found  
+    
+components:
+  schemas:
+    Show-devices:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: "Sample device"
+    Show-files:
+      type: array
+      items:
+        type: object
+        properties:
+          filename:
+            type: string
+            example: "sample.jpg"
+          
+    Show-playlists:
+      type: array
+      items:
+        type: object
+        properties:
+          id_playlist:
+            type: integer
+            format: int64
+            example: 4
+          title:
+            type: string
+            example: "Sample playlist"
+            
+    Show-assigned-file:
+      type: array
+      items:
+        type: object
+        properties:
+          id_playlist:
+            type: integer
+            format: int64
+            example: 2
+          filename:
+            type: string
+            example: "sample.jpg"
+    
+    Show-assigned-playlist:
+      type: array
+      items:
+        type: object
+        properties:
+          id_device:
+            type: integer
+            format: int64
+            example: 2
+          title:
+            type: string
+            example: "Sample playlist"      
+  
