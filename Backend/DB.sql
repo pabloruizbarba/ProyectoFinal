@@ -23,10 +23,12 @@ DROP TABLE IF EXISTS `Assign`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Assign` (
+  `id_assign` int(11) NOT NULL AUTO_INCREMENT,
   `id_playlist` int(11) NOT NULL,
   `id_file` int(11) NOT NULL,
   `duration` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_playlist`,`id_file`),
+  PRIMARY KEY (`id_assign`),
+  KEY `id_playlist` (`id_playlist`),
   KEY `id_file` (`id_file`),
   CONSTRAINT `Assign_ibfk_1` FOREIGN KEY (`id_playlist`) REFERENCES `Playlists` (`id_playlist`),
   CONSTRAINT `Assign_ibfk_2` FOREIGN KEY (`id_file`) REFERENCES `Files` (`id_file`)
@@ -57,7 +59,7 @@ CREATE TABLE `Devices` (
   PRIMARY KEY (`id_device`),
   KEY `id_playlist` (`id_playlist`),
   CONSTRAINT `Devices_ibfk_1` FOREIGN KEY (`id_playlist`) REFERENCES `Playlists` (`id_playlist`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +68,7 @@ CREATE TABLE `Devices` (
 
 LOCK TABLES `Devices` WRITE;
 /*!40000 ALTER TABLE `Devices` DISABLE KEYS */;
+INSERT INTO `Devices` VALUES (1,'prueba','ABC123',NULL),(4,'prueba2','ABC456',1);
 /*!40000 ALTER TABLE `Devices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +110,7 @@ CREATE TABLE `Playlists` (
   `title` varchar(100) NOT NULL,
   `hash_list` varchar(64) NOT NULL,
   PRIMARY KEY (`id_playlist`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,6 +119,7 @@ CREATE TABLE `Playlists` (
 
 LOCK TABLES `Playlists` WRITE;
 /*!40000 ALTER TABLE `Playlists` DISABLE KEYS */;
+INSERT INTO `Playlists` VALUES (1,'test_list','asdfghjklzxcvb');
 /*!40000 ALTER TABLE `Playlists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -128,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-24 12:55:45
+-- Dump completed on 2023-04-25 13:36:08

@@ -9,14 +9,14 @@ from django.db import models
 
 
 class Assign(models.Model):
-    id_playlist = models.OneToOneField('Playlists', models.DO_NOTHING, db_column='id_playlist', primary_key=True)  # The composite primary key (id_playlist, id_file) found, that is not supported. The first column is selected.
+    id_assign = models.AutoField(primary_key=True)
+    id_playlist = models.ForeignKey('Playlists', models.DO_NOTHING, db_column='id_playlist')
     id_file = models.ForeignKey('Files', models.DO_NOTHING, db_column='id_file')
     duration = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'Assign'
-        unique_together = (('id_playlist', 'id_file'),)
 
 
 class Devices(models.Model):
