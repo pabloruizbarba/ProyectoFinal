@@ -21,5 +21,5 @@ import webserviceapp.views as views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Devices
-    path('v1/add-device', views.add_device),
+    path('v1/add-device/', views.add_device),
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
 import jwt
-from webserviceapp.models import Devices
+from webserviceapp.models import Devices, Playlists
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -16,13 +16,23 @@ def add_device(request):
     data = json.loads(request.body)
     
     try:
-        device = Devices(request) 
+        device = Devices() 
         # Check if the device is already registered
-        device.name = data['name']
-        if Devices.objects.filter(name=device.name).exists():
+        if Devices.objects.filter(name=data['name']).exists():
             return HttpResponse("A device with that name already exists", status=409)
+        else: 
+            device.name=data['name']
+
         device.code = data['code']
-        device.id_playlist = data["id_playlist"] if "id_playlist" in data else None
+
+        print(device.name)
+        print(device.code)
+        print(data["id_playlist"])
+        # Check if there is data for id_playlist
+    #   device.id_playlist = data["id_playlist"] if "id_playlist" in data else None
+        device.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"]) if "id_playlist" in data else None
+        print(device.id_playlist)
+
         device.save()
         return HttpResponse("Device created", status=201)
     except:
