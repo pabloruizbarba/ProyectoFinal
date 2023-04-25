@@ -25,14 +25,9 @@ def add_device(request):
 
         device.code = data['code']
 
-        print(device.name)
-        print(device.code)
-        print(data["id_playlist"])
         # Check if there is data for id_playlist
-    #   device.id_playlist = data["id_playlist"] if "id_playlist" in data else None
         device.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"]) if "id_playlist" in data else None
-        print(device.id_playlist)
-
+     
         device.save()
         return HttpResponse("Device created", status=201)
     except:
