@@ -25,14 +25,14 @@ def add_device(request):
             device.name=data['name']
 
         device.code = data['code']
-
+    
         # Check if there is data for id_playlist
-        device.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"]) if "id_playlist" in data else None
-     
+        device.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"]) if "id_playlist" in data else None   
         device.save()
         return HttpResponse("Device created", status=201)
     except:
         return HttpResponse('Bad request - Missed or incorrect params', status=400)
+
 
 def encrypt_string(hash_string):
         sha_signature = \
@@ -66,3 +66,22 @@ def add_playlist(request):
         return HttpResponse("Device created", status=201)
     except:
         return HttpResponse('Bad request - Missed or incorrect params', status=400)  
+
+     
+@csrf_exempt
+def assign_playlist(request):
+    """Assign a playlist to a device"""
+
+    # Check if the method is POST
+    if request.method != 'POST':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    data = json.loads(request.body)
+    try:
+        device = Devices()
+        device = Devices.objects.get(id_device=data['id_device'])
+        device.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"])
+        device.save()
+        return HttpResponse("Playlist assigned to device", status=201)
+    except:
+        return HttpResponse('Bad request - Missed or incorrect params', status=400)
