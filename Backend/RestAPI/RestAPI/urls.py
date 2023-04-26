@@ -22,6 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Devices
     path('v1/add-device/', views.add_device),
+    # Playlists
     path('v1/add-playlist/', views.add_playlist),
+    path('v1/delete-playlist/', views.delete_playlist),
+    # Assign
     path('v1/assign-playlist/', views.assign_playlist)
 ]
