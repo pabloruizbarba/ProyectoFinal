@@ -134,3 +134,28 @@ def delete_device(request):
         return HttpResponse('Element not found', status=404) 
         
 
+@csrf_exempt
+def view_playlists(request):
+    """View all the playlists from database"""
+    
+    # Check if the method is GET
+    if request.method != 'GET':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    try:
+        listTable = Playlists.objects.all()
+        lists = []
+
+        for l in listTable:
+            list = {
+                "id_playlist":l.id_playlist,
+                "title":l.title,
+                "hash_list":l.hash_list,
+            }
+
+            lists.append(list)
+    
+    except:
+        return HttpResponse("Bad Request - Missing path parameters", status=400)
+    
+    return JsonResponse(lists,json_dumps_params={'ensure_ascii':False}, safe=False,status=200) 
