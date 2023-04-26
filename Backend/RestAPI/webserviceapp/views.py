@@ -159,3 +159,31 @@ def view_playlists(request):
         return HttpResponse("Bad Request - Missing path parameters", status=400)
     
     return JsonResponse(lists,json_dumps_params={'ensure_ascii':False}, safe=False,status=200) 
+
+
+@csrf_exempt
+def view_devices(request):
+    """View all the devices from database"""
+    
+    # Check if the method is GET
+    if request.method != 'GET':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    try:
+        screenTable = Devices.objects.all()
+        screens = []
+
+        for s in screenTable:
+            screen = {
+                "id_device":s.id_device,
+                "name":s.name,
+                "code":s.code,
+                "id_playlist":s.id_playlist if s.id_playlist else "",
+            }
+
+            screens.append(screen)
+    
+    except:
+        return HttpResponse("Bad Request - Missing path parameters", status=400)
+    
+    return JsonResponse(screens,json_dumps_params={'ensure_ascii':False}, safe=False,status=200) 
