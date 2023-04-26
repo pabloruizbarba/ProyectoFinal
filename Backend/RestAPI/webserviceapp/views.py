@@ -85,3 +85,32 @@ def assign_playlist(request):
         return HttpResponse("Playlist assigned to device", status=201)
     except:
         return HttpResponse('Bad request - Missed or incorrect params', status=400)
+
+
+@csrf_exempt
+def delete_playlist(request):
+    """Delete a playlist from database"""
+
+    # Check if the method is DELETE
+    if request.method != 'DELETE':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    data = json.loads(request.body)
+    print(data['id_playlist'])
+    playlist = Playlists()
+    try:
+         #Search for id_playlist at the table
+        playlist = Playlists.objects.get(id_playlist=data['id_playlist'])
+        if Devices.objects.filter(id_playlist=data['id_playlist']).exists():
+            return HttpResponse("The playlist is being used", status=404)
+        else:
+            print(playlist)
+            # Delete row
+            playlist.delete()
+            return HttpResponse("Deleted successfully", status=200)
+    except:
+        return HttpResponse('Element not found', status=404)
+    
+    
+        
+
