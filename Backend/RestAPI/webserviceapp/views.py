@@ -96,7 +96,7 @@ def delete_playlist(request):
         return HttpResponse("Method Not Allowed", status=405)
     
     data = json.loads(request.body)
-    print(data['id_playlist'])
+
     playlist = Playlists()
     try:
          #Search for id_playlist at the table
@@ -104,13 +104,33 @@ def delete_playlist(request):
         if Devices.objects.filter(id_playlist=data['id_playlist']).exists():
             return HttpResponse("The playlist is being used", status=404)
         else:
-            print(playlist)
+            
             # Delete row
             playlist.delete()
             return HttpResponse("Deleted successfully", status=200)
     except:
         return HttpResponse('Element not found', status=404)
     
+
+@csrf_exempt
+def delete_device(request):
+    """Delete a device from database"""
+
+    # Check if the method is DELETE
+    if request.method != 'DELETE':
+        return HttpResponse("Method Not Allowed", status=405)
     
+    data = json.loads(request.body)
+    
+    device = Devices()
+    try:
+         #Search for id_device at the table
+        device = Devices.objects.get(id_device=data['id_device'])
+        
+        # Delete row
+        device.delete()
+        return HttpResponse("Deleted successfully", status=200)
+    except:
+        return HttpResponse('Element not found', status=404) 
         
 
