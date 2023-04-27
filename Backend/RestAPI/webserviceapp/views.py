@@ -224,3 +224,27 @@ def add_file(request):
         return HttpResponse("File added to database", status=201)
     except:
         return HttpResponse('Bad request - Missed or incorrect params', status=400)
+    
+
+@csrf_exempt
+def delete_file(request):
+    """Delete a file from database"""
+
+    # Check if the method is DELETE
+    if request.method != 'DELETE':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    data = json.loads(request.body)
+
+    file = Files()
+    try:
+         #Search for id_file at the table
+        file = Files.objects.get(id_file=data['id_file'])
+        if Assign.objects.filter(id_file=data['id_file']).exists():
+            return HttpResponse("The file is being used", status=404)
+        else:
+            # Delete row from table
+            file.delete()
+            return HttpResponse("Deleted successfully", status=200)
+    except:
+        return HttpResponse('Element not found', status=404) 
