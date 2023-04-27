@@ -30,6 +30,7 @@ urlpatterns = [
     path('v1/view-playlists/', views.view_playlists),
     # Files
     path('v1/add-file/', views.add_file),
+    path('v1/delete-file/', views.delete_file),
     # Assign
     path('v1/assign-playlist/', views.assign_playlist)
 ]
