@@ -172,13 +172,13 @@ def view_devices(request):
     try:
         screenTable = Devices.objects.all()
         screens = []
-
+        # for each row of the table:
         for s in screenTable:
             screen = {
                 "id_device":s.id_device,
                 "name":s.name,
                 "code":s.code,
-                "id_playlist":s.id_playlist if s.id_playlist else "",
+                "id_playlist":str(s.id_playlist) if s.id_playlist else "",
             }
 
             screens.append(screen)
