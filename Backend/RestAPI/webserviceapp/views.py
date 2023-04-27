@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import json
 import jwt
-import hashlib
-from webserviceapp.models import Devices, Playlists
+import hashlib, os
+from webserviceapp.models import Devices, Playlists, Files, Assign
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -187,3 +187,40 @@ def view_devices(request):
         return HttpResponse("Bad Request - Missing path parameters", status=400)
     
     return JsonResponse(screens,json_dumps_params={'ensure_ascii':False}, safe=False,status=200) 
+
+
+def hash_file(filepath):
+    sha256_hash = hashlib.sha256()
+    with open(filepath,"rb") as f:
+        # Read and update hash string value in blocks of 4K
+        for byte_block in iter(lambda: f.read(4096),b""):
+            sha256_hash.update(byte_block)
+    return sha256_hash.hexdigest()       
+
+@csrf_exempt
+def add_file(request):
+    """Add a new file to database"""
+
+    # Check if the method is POST
+    if request.method != 'POST':
+        return HttpResponse("Method Not Allowed", status=405)
+
+    data = json.loads(request.body) #it receives filename and type
+
+    try:
+        file = Files()
+        file.filename = data['filename']
+        file.type = data['type']
+        file.path = "../../media/"+file.filename
+        sha_code = hash_file(file.path)
+    
+        # Check if the file is already registered    
+        if Files.objects.filter(hash_file=sha_code).exists():
+            return HttpResponse("The file already exists", status=409)
+        else: 
+            file.hash_file=sha_code
+        # Save file data into database
+        file.save()
+        return HttpResponse("File added to database", status=201)
+    except:
+        return HttpResponse('Bad request - Missed or incorrect params', status=400)

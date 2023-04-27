@@ -28,6 +28,8 @@ urlpatterns = [
     path('v1/add-playlist/', views.add_playlist),
     path('v1/delete-playlist/', views.delete_playlist),
     path('v1/view-playlists/', views.view_playlists),
+    # Files
+    path('v1/add-file/', views.add_file),
     # Assign
     path('v1/assign-playlist/', views.assign_playlist)
 ]
