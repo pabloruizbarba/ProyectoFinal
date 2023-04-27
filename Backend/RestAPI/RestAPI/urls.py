@@ -32,5 +32,6 @@ urlpatterns = [
     path('v1/add-file/', views.add_file),
     path('v1/delete-file/', views.delete_file),
     # Assign
-    path('v1/assign-playlist/', views.assign_playlist)
+    path('v1/assign-playlist/', views.assign_playlist),
+    path('v1/assign-file/', views.assign_file)
 ]
