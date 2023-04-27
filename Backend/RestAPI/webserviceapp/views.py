@@ -104,7 +104,9 @@ def delete_playlist(request):
         if Devices.objects.filter(id_playlist=data['id_playlist']).exists():
             return HttpResponse("The playlist is being used", status=404)
         else:
-            
+            if Assign.objects.filter(id_playlist=data['id_playlist']).exists():
+                #Delete the entries of this playlist at the Assign table:
+                Assign.objects.filter(id_playlist=data['id_playlist']).delete()
             # Delete row
             playlist.delete()
             return HttpResponse("Deleted successfully", status=200)
@@ -248,3 +250,23 @@ def delete_file(request):
             return HttpResponse("Deleted successfully", status=200)
     except:
         return HttpResponse('Element not found', status=404) 
+    
+
+@csrf_exempt
+def assign_file(request):
+    """Assign a file to a playlist"""
+
+    # Check if the method is POST
+    if request.method != 'POST':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    data = json.loads(request.body)
+    try:
+        assign = Assign()
+        assign.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"])
+        assign.id_file=Files.objects.get(id_file=data["id_file"])
+        assign.duration=data["duration"] if "duration" in data else None
+        assign.save()
+        return HttpResponse("Playlist assigned to device", status=201)
+    except:
+        return HttpResponse('Bad request - Missed or incorrect params', status=400)
