@@ -23,6 +23,7 @@ urlpatterns = [
     # Devices
     path('v1/add-device/', views.add_device),
     path('v1/delete-device/', views.delete_device),
+    path('v1/view-devices/', views.view_devices),
     # Playlists
     path('v1/add-playlist/', views.add_playlist),
     path('v1/delete-playlist/', views.delete_playlist),
