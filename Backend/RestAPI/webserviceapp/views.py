@@ -327,3 +327,28 @@ def view_assigned_file(request):
         return HttpResponse("Not found", status=404)
     return JsonResponse(answers,json_dumps_params={'ensure_ascii':False}, safe=False,status=200)
     
+
+@csrf_exempt
+def view_files(request):
+    """View all the files from database"""
+    
+    # Check if the method is GET
+    if request.method != 'GET':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    try:
+        listTable = Files.objects.all()
+        lists = []
+
+        for l in listTable:
+            list = {
+                "filename":l.filename,
+                "type":l.type,
+            }
+
+            lists.append(list)
+    
+    except:
+        return HttpResponse("Bad Request - Missing path parameters", status=400)
+    
+    return JsonResponse(lists,json_dumps_params={'ensure_ascii':False}, safe=False,status=200) 

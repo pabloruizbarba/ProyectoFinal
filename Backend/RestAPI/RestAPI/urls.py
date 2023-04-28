@@ -33,6 +33,7 @@ urlpatterns = [
     # Files
     path('v1/add-file/', views.add_file),
     path('v1/delete-file/', views.delete_file),
+    path('v1/view-files/', views.view_files),
     # Assign
     path('v1/assign-playlist/', views.assign_playlist),
     path('v1/assign-file/', views.assign_file)
