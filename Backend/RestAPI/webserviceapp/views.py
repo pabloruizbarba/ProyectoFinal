@@ -298,3 +298,32 @@ def view_assigned_playlist(request):
     
     return JsonResponse(answer,json_dumps_params={'ensure_ascii':False}, safe=False,status=200) 
     
+
+@csrf_exempt
+def view_assigned_file(request):
+    """View all the files assigned to a playlist"""
+    
+    # Check if the method is GET
+    if request.method != 'GET':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    data = json.loads(request.body)
+    
+    try:
+        filesTable=Assign.objects.filter(id_playlist=data['id_playlist'])
+        answers = []
+        for f in filesTable:
+            assign=Assign()
+            assign=Assign.objects.get(id_assign=f.id_assign)
+              
+            file=Files()
+            file=Files.objects.get(id_file = str(assign.id_file)[14:-1])
+            answer = {
+                "id_playlist":data['id_playlist'],
+                "title":file.filename,
+            }
+            answers.append(answer)
+    except:
+        return HttpResponse("Not found", status=404)
+    return JsonResponse(answers,json_dumps_params={'ensure_ascii':False}, safe=False,status=200)
+    

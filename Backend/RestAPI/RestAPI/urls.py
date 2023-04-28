@@ -29,6 +29,7 @@ urlpatterns = [
     path('v1/add-playlist/', views.add_playlist),
     path('v1/delete-playlist/', views.delete_playlist),
     path('v1/view-playlists/', views.view_playlists),
+    path('v1/view-assigned-file/', views.view_assigned_file),
     # Files
     path('v1/add-file/', views.add_file),
     path('v1/delete-file/', views.delete_file),
