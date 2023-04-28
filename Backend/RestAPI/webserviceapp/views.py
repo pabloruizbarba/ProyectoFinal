@@ -180,7 +180,7 @@ def view_devices(request):
                 "id_device":s.id_device,
                 "name":s.name,
                 "code":s.code,
-                "id_playlist":str(s.id_playlist) if s.id_playlist else "",
+                "id_playlist":str(s.id_playlist)[18:-1] if s.id_playlist else "",
             }
 
             screens.append(screen)
@@ -270,3 +270,31 @@ def assign_file(request):
         return HttpResponse("Playlist assigned to device", status=201)
     except:
         return HttpResponse('Bad request - Missed or incorrect params', status=400)
+    
+
+@csrf_exempt
+def view_assigned_playlist(request):
+    """View the playlist assigned to a device"""
+    
+    # Check if the method is GET
+    if request.method != 'GET':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    data = json.loads(request.body)
+
+    try:
+        dev=Devices()
+        dev= Devices.objects.get(id_device=data['id_device'])
+        id_pl=str(dev.id_playlist)[18:-1]
+      
+        play=Playlists()
+        play=Playlists.objects.get(id_playlist = id_pl)
+        answer = {
+                "id_device":dev.id_device,
+                "title":play.title,
+            }    
+    except:
+        return HttpResponse("Not found", status=404)
+    
+    return JsonResponse(answer,json_dumps_params={'ensure_ascii':False}, safe=False,status=200) 
+    
