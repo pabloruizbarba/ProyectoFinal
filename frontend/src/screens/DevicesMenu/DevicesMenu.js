@@ -14,7 +14,7 @@ const DevicesMenu = () => {
 
     const onClickFiles= (e) => {
         e.preventDefault();
-        navigate("/home");
+        navigate("/media-menu");
     }
 
     const onClickHome= (e) => {

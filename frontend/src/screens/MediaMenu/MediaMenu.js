@@ -1,10 +1,10 @@
 import {useNavigate} from  "react-router-dom";
-import "./PlaylistsMenu.css"
+import "./MediaMenu.css"
 
 //Images
 import whiteLogo from "../../images/logos/logo.in.blanco.png"
 
-const PlaylistsMenu = () => {
+const MediaMenu = () => {
     const navigate = useNavigate();
 
     const onClickDevices= (e) => {
@@ -12,9 +12,9 @@ const PlaylistsMenu = () => {
         navigate("/devices-menu");
     }
 
-    const onClickFiles= (e) => {
+    const onClickPlaylists= (e) => {
         e.preventDefault();
-        navigate("/media-menu");
+        navigate("/playlists-menu");
     }
 
     const onClickHome= (e) => {
@@ -22,12 +22,12 @@ const PlaylistsMenu = () => {
         navigate("/home");
     }
 
-    const onClickNewPlay= (e) => {
+    const onClickAddMedia= (e) => {
         e.preventDefault();
         navigate("/home");
     }
 
-    const onClickViewPlay= (e) => {
+    const onClickViewMedia= (e) => {
         e.preventDefault();
         navigate("/home");
     }
@@ -38,14 +38,15 @@ const PlaylistsMenu = () => {
                 <img src={whiteLogo} alt="Inusual" title="Home" onClick={onClickHome}/>
                 <div className="buttons-left">
                     <input type="button" value="DEVICES" onClick={onClickDevices}/>
+                    <input type="button" value="PLAYLISTS" onClick={onClickPlaylists}/>
                     <input type="button" value="HOME" onClick={onClickHome}/>
-                    <input type="button" value="MEDIA FILES" onClick={onClickFiles}/>
+                    
                 </div> 
             </div>
             <div className="right-home">
                 <div className="buttons-right">
-                    <input type="button" value="NEW PLAYLIST" onClick={onClickNewPlay}/>
-                    <input type="button" value="VIEW PLAYLISTS" onClick={onClickViewPlay}/>
+                    <input type="button" value="ADD MEDIA FILE" onClick={onClickAddMedia}/>
+                    <input type="button" value="VIEW MEDIA FILES" onClick={onClickViewMedia}/>
                 </div>
             </div>
         </div>
@@ -53,4 +54,4 @@ const PlaylistsMenu = () => {
 
 }
 
-export default PlaylistsMenu;
+export default MediaMenu;
