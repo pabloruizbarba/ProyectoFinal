@@ -1,0 +1,67 @@
+
+.main-container {
+    display: flex;
+    height:100vh;  
+}
+.left-home {
+    width: 30%;
+    height: 100%;
+    background-color: black;
+}
+.rigth-home {
+    width: 70%;
+    height: 100%;
+    background-color: white;
+}
+
+/* BUTTONS */
+.buttons{
+    position: relative;
+    text-align: center;
+    margin-top: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.buttons input{
+    margin-top: 5%;
+    width: 40%;
+    padding: 2%;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #333333;
+    border-radius: 10px;
+}
+
+.buttons input:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* LEFT IMAGE */
+.left-home img{
+    width:40%;
+    height:auto;
+    margin-top: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left-home img:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+}
+
+/* RIGHT IMAGE */
+/* the green is #089c94*/
+.greenLogo{
+    width:45vh;
+    height:auto;
+    margin-top: 30vh;
+    margin-left:45vh;
+}
+
+.greenLogo:hover{
+    transform: scale(1.1);
+}
