@@ -1,21 +1,15 @@
 import {useNavigate} from  "react-router-dom";
-import "./Home.css"
+import "./PlaylistsMenu.css"
 
 //Images
 import whiteLogo from "../../images/logos/logo.in.blanco.png"
-import greenLogo from "../../images/logos/logo.in.pro.verde.png"
 
-const Home = () => {
+const PlaylistsMenu = () => {
     const navigate = useNavigate();
 
     const onClickDevices= (e) => {
         e.preventDefault();
         navigate("/devices-menu");
-    }
-
-    const onClickPlaylists= (e) => {
-        e.preventDefault();
-        navigate("/playlists-menu");
     }
 
     const onClickFiles= (e) => {
@@ -28,29 +22,35 @@ const Home = () => {
         navigate("/home");
     }
 
+    const onClickNewPlay= (e) => {
+        e.preventDefault();
+        navigate("/home");
+    }
+
+    const onClickViewPlay= (e) => {
+        e.preventDefault();
+        navigate("/home");
+    }
+
     return(
         <div className="main-container">
             <div className="left-home">
                 <img src={whiteLogo} alt="Inusual" title="Home" onClick={onClickHome}/>
-                <div className="buttons">
+                <div className="buttons-left">
                     <input type="button" value="DEVICES" onClick={onClickDevices}/>
-                    <input type="button" value="PLAYLISTS" onClick={onClickPlaylists}/>
+                    <input type="button" value="HOME" onClick={onClickHome}/>
                     <input type="button" value="MEDIA FILES" onClick={onClickFiles}/>
                 </div> 
             </div>
             <div className="right-home">
-                <a href="https://www.inusualcom.com/" target="_blank" rel="noreferrer">
-                    <img 
-                        className="greenLogo"
-                        alt="Inusual" 
-                        title="About us"
-                        src={greenLogo}>
-                    </img>
-                </a>
+                <div className="buttons-right">
+                    <input type="button" value="NEW PLAYLIST" onClick={onClickNewPlay}/>
+                    <input type="button" value="VIEW PLAYLISTS" onClick={onClickViewPlay}/>
+                </div>
             </div>
         </div>
     );
 
 }
 
-export default Home;
+export default PlaylistsMenu;

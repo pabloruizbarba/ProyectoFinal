@@ -9,7 +9,7 @@ const DevicesMenu = () => {
 
     const onClickPlaylists= (e) => {
         e.preventDefault();
-        navigate("/home");
+        navigate("/playlists-menu");
     }
 
     const onClickFiles= (e) => {
