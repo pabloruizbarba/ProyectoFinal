@@ -46,6 +46,7 @@ const NewPlaylist = () => {
             navigate("/playlists-menu");
           })
           .catch(function (error) {
+            alert("Try a different title");
             console.log(error);
           });
       }
