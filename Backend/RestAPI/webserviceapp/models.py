@@ -19,11 +19,21 @@ class Assign(models.Model):
         db_table = 'Assign'
 
 
+class Codes(models.Model):
+    id_code = models.AutoField(primary_key=True)
+    code = models.CharField(max_length=6)
+
+    class Meta:
+        managed = False
+        db_table = 'Codes'
+
+
 class Devices(models.Model):
     id_device = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     code = models.CharField(max_length=50)
     id_playlist = models.ForeignKey('Playlists', models.DO_NOTHING, db_column='id_playlist', blank=True, null=True)
+    description = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False
