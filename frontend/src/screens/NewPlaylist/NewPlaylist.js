@@ -35,12 +35,10 @@ const NewPlaylist = () => {
         })
     }
 
-    const config = {headers:{}}
-
     const handleSubmit = (e) => {
         e.preventDefault();
     
-        axios.post('http://localhost:8000/v1/add-playlist/', formData, config)
+        axios.post('http://localhost:8000/v1/add-playlist/', formData)
           .then(function (response) {
             alert("Playlist added succesfully");
             navigate("/playlists-menu");

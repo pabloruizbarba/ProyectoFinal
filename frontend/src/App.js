@@ -7,6 +7,7 @@ import DevicesMenu from './screens/DevicesMenu/DevicesMenu';
 import PlaylistsMenu from './screens/PlaylistsMenu/PlaylistsMenu';
 import MediaMenu from './screens/MediaMenu/MediaMenu';
 import NewPlaylist from './screens/NewPlaylist/NewPlaylist';
+import AddDevice from './screens/AddDevice/AddDevice';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/playlists-menu" element={<PlaylistsMenu />}></Route>
       <Route path="/media-menu" element={<MediaMenu />}></Route>
       <Route path="/new-playlist" element={<NewPlaylist />}></Route>
+      <Route path="/add-device" element={<AddDevice />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
