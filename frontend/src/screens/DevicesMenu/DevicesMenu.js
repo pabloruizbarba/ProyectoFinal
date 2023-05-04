@@ -24,7 +24,7 @@ const DevicesMenu = () => {
 
     const onClickAddDev= (e) => {
         e.preventDefault();
-        navigate("/home");
+        navigate("/add-device");
     }
 
     const onClickViewDev= (e) => {
