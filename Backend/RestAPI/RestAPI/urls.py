@@ -36,5 +36,7 @@ urlpatterns = [
     path('v1/view-files/', views.view_files),
     # Assign
     path('v1/assign-playlist/', views.assign_playlist),
-    path('v1/assign-file/', views.assign_file)
+    path('v1/assign-file/', views.assign_file),
+    # Codes
+    path('v1/add-code/', views.add_code),
 ]

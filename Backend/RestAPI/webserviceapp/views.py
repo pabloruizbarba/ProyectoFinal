@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 import jwt
 import hashlib, os
-from webserviceapp.models import Devices, Playlists, Files, Assign
+from webserviceapp.models import Devices, Playlists, Files, Assign, Codes
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -23,11 +23,17 @@ def add_device(request):
             return HttpResponse("A device with that name already exists", status=409)
         else: 
             device.name=data['name']
+        #Check if the code has already been registered by an external screen
+        if Codes.objects.filter(code=data['code']).exists():
+            device.code = data['code']
+        else: 
+            return HttpResponse("Code does not exist", status=406)
 
-        device.code = data['code']
-    
         # Check if there is data for id_playlist
         device.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"]) if "id_playlist" in data else None   
+
+        device.description=data['description']
+
         device.save()
         return HttpResponse("Device created", status=201)
     except:
@@ -352,3 +358,23 @@ def view_files(request):
         return HttpResponse("Bad Request - Missing path parameters", status=400)
     
     return JsonResponse(lists,json_dumps_params={'ensure_ascii':False}, safe=False,status=200) 
+
+
+@csrf_exempt
+def add_code(request):
+    """Add a new code to database"""
+
+    # Check if the method is POST
+    if request.method != 'POST':
+        return HttpResponse("Method Not Allowed", status=405)
+
+    data = json.loads(request.body)
+
+    try:
+        cod = Codes() 
+        cod.code = data['code']
+
+        cod.save()
+        return HttpResponse("Code added", status=201)
+    except:
+        return HttpResponse('Bad request - Missed or incorrect params', status=400)  
