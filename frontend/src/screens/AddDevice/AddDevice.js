@@ -39,13 +39,15 @@ const AddDevice = () => {
     const [formData, setFormData] = useState({
         name: "",
         code: "",
-        id_playlist:"",
+        description:"",
+        id_playlist:""
     });
 
     const onchangeName = (e) => {
         setFormData({
             name: e.target.value,
             code: formData.code,
+            description: formData.description,
             id_playlist: formData.id_player 
         })
     }
@@ -54,7 +56,17 @@ const AddDevice = () => {
         setFormData({
             name: formData.name,
             code: e.target.value,
+            description: formData.description,
             id_playlist: formData.id_player
+        })
+    }
+
+    const onchangeDesc = (e) => {
+        setFormData({
+            name: formData.name,
+            code: formData.code,
+            description: e.target.value,
+            id_playlist: formData.id_player 
         })
     }
 
@@ -62,6 +74,7 @@ const AddDevice = () => {
         setFormData({ 
             name: formData.name,
             code: formData.code,
+            description: formData.description,
             id_playlist: e.target.value 
         });
         }
@@ -77,8 +90,13 @@ const AddDevice = () => {
             navigate("/devices-menu");
             })
             .catch(function (error) {
-            alert("Try another name");
-            console.log(error);
+                if( error.response.status === 409 ){
+                    alert("Name already exists")
+                }
+                if( error.response.status === 406 ){
+                    alert("Code not valid")
+                }
+                console.log(error);
             });
           }
 
@@ -98,6 +116,7 @@ const AddDevice = () => {
                     <form className="add_dev_form" onSubmit={handleSubmit}>
                         <input className="name" type="text" placeholder="NAME*" onChange={onchangeName}/>
                         <input className="code" type="text" placeholder="CODE*" onChange={onchangeCode}/>
+                        <textarea className="desc" type="text" placeholder="DESCRIPTION (OPTIONAL)" onChange={onchangeDesc}/>
                         <p>Select a playlist (optional):</p>
                         <select className="id_playlist" onChange={onOptionChange}>
                             <option>NO PLAYLIST</option>
