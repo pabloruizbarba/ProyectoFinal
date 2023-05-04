@@ -1,10 +1,13 @@
 import {useNavigate} from  "react-router-dom";
-import "./PlaylistsMenu.css"
+import axios from "axios";
+import { useState } from "react";
+import "./NewPlaylist.css"
 
 //Images
 import whiteLogo from "../../images/logos/logo.in.blanco.png"
 
-const PlaylistsMenu = () => {
+const NewPlaylist = () => {
+
     const navigate = useNavigate();
 
     const onClickDevices= (e) => {
@@ -22,15 +25,31 @@ const PlaylistsMenu = () => {
         navigate("/home");
     }
 
-    const onClickNewPlay= (e) => {
-        e.preventDefault();
-        navigate("/new-playlist");
+    const [formData, setFormData] = useState({
+        title: ""
+    });
+
+    const onchangeTitle = (e) => {
+        setFormData({
+            title: e.target.value,
+        })
     }
 
-    const onClickViewPlay= (e) => {
+    const config = {headers:{}}
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        navigate("/home");
-    }
+    
+        axios.post('http://localhost:8000/v1/add-playlist/', formData, config)
+          .then(function (response) {
+            alert("Playlist added succesfully");
+            navigate("/playlists-menu");
+          })
+          .catch(function (error) {
+            alert("Try a different title");
+            console.log(error);
+          });
+      }
 
     return(
         <div className="main-container">
@@ -43,9 +62,11 @@ const PlaylistsMenu = () => {
                 </div> 
             </div>
             <div className="right-home">
-                <div className="buttons-right">
-                    <input type="button" value="NEW PLAYLIST" onClick={onClickNewPlay}/>
-                    <input type="button" value="VIEW PLAYLISTS" onClick={onClickViewPlay}/>
+                <div className="form-div">
+                    <form className="new_play_form" onSubmit={handleSubmit}>
+                        <input className="title" type="text" placeholder="PLAYLIST TITLE" onChange={onchangeTitle}/>
+                        <input className="create" type="submit" value="CREATE" />
+                    </form>
                 </div>
             </div>
         </div>
@@ -53,4 +74,4 @@ const PlaylistsMenu = () => {
 
 }
 
-export default PlaylistsMenu;
+export default NewPlaylist;

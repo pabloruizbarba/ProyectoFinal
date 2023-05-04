@@ -6,6 +6,7 @@ import Home from './screens/Home/Home';
 import DevicesMenu from './screens/DevicesMenu/DevicesMenu';
 import PlaylistsMenu from './screens/PlaylistsMenu/PlaylistsMenu';
 import MediaMenu from './screens/MediaMenu/MediaMenu';
+import NewPlaylist from './screens/NewPlaylist/NewPlaylist';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Route path="/devices-menu" element={<DevicesMenu />}></Route>
       <Route path="/playlists-menu" element={<PlaylistsMenu />}></Route>
       <Route path="/media-menu" element={<MediaMenu />}></Route>
-      
+      <Route path="/new-playlist" element={<NewPlaylist />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
