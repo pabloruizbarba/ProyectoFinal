@@ -186,6 +186,7 @@ def view_devices(request):
                 "id_device":s.id_device,
                 "name":s.name,
                 "code":s.code,
+                "description":s.description,
                 "id_playlist":str(s.id_playlist)[18:-1] if s.id_playlist else "",
             }
 
