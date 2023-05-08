@@ -79,11 +79,15 @@ table {
     padding: 0.3em;
  }
 
- .paperbin{
-    width:15px;
+ .modify:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+ }
+
+ .pencil{
+    width:20px;
     height: auto;
  }
 
- .paperbin:hover{cursor:pointer;}
+ .pencil:hover{cursor:pointer;}
 
- .select_playlist{width:60%;}
