@@ -75,7 +75,7 @@ def add_playlist(request):
 
      
 @csrf_exempt
-def assign_playlist(request):
+def assign_playlist(request,device_id):
     """Assign a playlist to a device"""
 
     # Check if the method is POST
@@ -85,7 +85,7 @@ def assign_playlist(request):
     data = json.loads(request.body)
     try:
         device = Devices()
-        device = Devices.objects.get(id_device=data['id_device'])
+        device = Devices.objects.get(id_device=device_id)
         device.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"])
         device.save()
         return HttpResponse("Playlist assigned to device", status=201)
@@ -260,7 +260,7 @@ def delete_file(request):
     
 
 @csrf_exempt
-def assign_file(request):
+def assign_file(request,playlist_id):
     """Assign a file to a playlist"""
 
     # Check if the method is POST
@@ -270,7 +270,7 @@ def assign_file(request):
     data = json.loads(request.body)
     try:
         assign = Assign()
-        assign.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"])
+        assign.id_playlist=Playlists.objects.get(id_playlist=playlist_id)
         assign.id_file=Files.objects.get(id_file=data["id_file"])
         assign.duration=data["duration"] if "duration" in data else None
         assign.save()
@@ -280,19 +280,20 @@ def assign_file(request):
     
 
 @csrf_exempt
-def view_assigned_playlist(request):
+def view_assigned_playlist(request,device_id):
     """View the playlist assigned to a device"""
-    
+    print(device_id)
     # Check if the method is GET
     if request.method != 'GET':
         return HttpResponse("Method Not Allowed", status=405)
     
-    data = json.loads(request.body)
-
     try:
         dev=Devices()
-        dev= Devices.objects.get(id_device=data['id_device'])
+        
+        dev= Devices.objects.get(id_device=device_id)
+        print(dev.id_device)
         id_pl=str(dev.id_playlist)[18:-1]
+        print(id_pl)
       
         play=Playlists()
         play=Playlists.objects.get(id_playlist = id_pl)
@@ -307,17 +308,15 @@ def view_assigned_playlist(request):
     
 
 @csrf_exempt
-def view_assigned_file(request):
+def view_assigned_file(request,playlist_id):
     """View all the files assigned to a playlist"""
     
     # Check if the method is GET
     if request.method != 'GET':
         return HttpResponse("Method Not Allowed", status=405)
     
-    data = json.loads(request.body)
-    
     try:
-        filesTable=Assign.objects.filter(id_playlist=data['id_playlist'])
+        filesTable=Assign.objects.filter(id_playlist=playlist_id)
         answers = []
         for f in filesTable:
             assign=Assign()
@@ -326,7 +325,7 @@ def view_assigned_file(request):
             file=Files()
             file=Files.objects.get(id_file = str(assign.id_file)[14:-1])
             answer = {
-                "id_playlist":data['id_playlist'],
+                "id_playlist":playlist_id,
                 "title":file.filename,
             }
             answers.append(answer)
