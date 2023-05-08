@@ -29,7 +29,7 @@ const DevicesMenu = () => {
 
     const onClickViewDev= (e) => {
         e.preventDefault();
-        navigate("/home");
+        navigate("/view-devices");
     }
 
     return(
