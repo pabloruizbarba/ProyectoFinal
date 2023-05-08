@@ -24,19 +24,19 @@ urlpatterns = [
     path('v1/add-device/', views.add_device),
     path('v1/delete-device/', views.delete_device),
     path('v1/view-devices/', views.view_devices),
-    path('v1/view-assigned-playlist/', views.view_assigned_playlist),
+    path('v1/view-assigned-playlist/<int:device_id>', views.view_assigned_playlist),
     # Playlists
     path('v1/add-playlist/', views.add_playlist),
     path('v1/delete-playlist/', views.delete_playlist),
     path('v1/view-playlists/', views.view_playlists),
-    path('v1/view-assigned-file/', views.view_assigned_file),
+    path('v1/view-assigned-file/<int:playlist_id>', views.view_assigned_file),
     # Files
     path('v1/add-file/', views.add_file),
     path('v1/delete-file/', views.delete_file),
     path('v1/view-files/', views.view_files),
     # Assign
-    path('v1/assign-playlist/', views.assign_playlist),
-    path('v1/assign-file/', views.assign_file),
+    path('v1/assign-playlist/<int:device_id>', views.assign_playlist),
+    path('v1/assign-file/<int:playlist_id>', views.assign_file),
     # Codes
     path('v1/add-code/', views.add_code),
 ]
