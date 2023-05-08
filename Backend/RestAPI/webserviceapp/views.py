@@ -94,25 +94,23 @@ def assign_playlist(request,device_id):
 
 
 @csrf_exempt
-def delete_playlist(request):
+def delete_playlist(request, playlist_id):
     """Delete a playlist from database"""
 
     # Check if the method is DELETE
     if request.method != 'DELETE':
         return HttpResponse("Method Not Allowed", status=405)
     
-    data = json.loads(request.body)
-
     playlist = Playlists()
     try:
          #Search for id_playlist at the table
-        playlist = Playlists.objects.get(id_playlist=data['id_playlist'])
-        if Devices.objects.filter(id_playlist=data['id_playlist']).exists():
+        playlist = Playlists.objects.get(id_playlist=playlist_id)
+        if Devices.objects.filter(id_playlist=playlist_id).exists():
             return HttpResponse("The playlist is being used", status=404)
         else:
-            if Assign.objects.filter(id_playlist=data['id_playlist']).exists():
+            if Assign.objects.filter(id_playlist=playlist_id).exists():
                 #Delete the entries of this playlist at the Assign table:
-                Assign.objects.filter(id_playlist=data['id_playlist']).delete()
+                Assign.objects.filter(id_playlist=playlist_id).delete()
             # Delete row
             playlist.delete()
             return HttpResponse("Deleted successfully", status=200)
@@ -121,19 +119,17 @@ def delete_playlist(request):
     
 
 @csrf_exempt
-def delete_device(request):
+def delete_device(request, device_id):
     """Delete a device from database"""
 
     # Check if the method is DELETE
     if request.method != 'DELETE':
         return HttpResponse("Method Not Allowed", status=405)
-    
-    data = json.loads(request.body)
-    
+     
     device = Devices()
     try:
          #Search for id_device at the table
-        device = Devices.objects.get(id_device=data['id_device'])
+        device = Devices.objects.get(id_device=device_id)
         
         # Delete row
         device.delete()
@@ -236,20 +232,18 @@ def add_file(request):
     
 
 @csrf_exempt
-def delete_file(request):
+def delete_file(request, file_id):
     """Delete a file from database"""
 
     # Check if the method is DELETE
     if request.method != 'DELETE':
         return HttpResponse("Method Not Allowed", status=405)
     
-    data = json.loads(request.body)
-
     file = Files()
     try:
          #Search for id_file at the table
-        file = Files.objects.get(id_file=data['id_file'])
-        if Assign.objects.filter(id_file=data['id_file']).exists():
+        file = Files.objects.get(id_file=file_id)
+        if Assign.objects.filter(id_file=file_id).exists():
             return HttpResponse("The file is being used", status=404)
         else:
             # Delete row from table
