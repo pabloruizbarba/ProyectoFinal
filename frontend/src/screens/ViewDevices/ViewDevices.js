@@ -65,7 +65,6 @@ const ViewDevices = () => {
                                     <tr>
                                         <td><b>{device.name}</b></td>
                                         <td>{device.description}</td>
-                                        {/* <td><input className="modify" type="button" value="View/Modify" onClick={onClickModify}/></td> */}
                                         <td>
                                             <Link to={`/modify-device/${device.id_device}`} activeClassName="active">
                                                 <img className="pencil" src={pencil} alt="pencil" title="View/Modify"></img>     
