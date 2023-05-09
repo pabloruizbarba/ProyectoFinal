@@ -1,6 +1,7 @@
 import {useNavigate, useParams} from  "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import swal from 'sweetalert';
 import "./ModifyDevice.css"
 
 
@@ -79,13 +80,29 @@ const ModifyDevice = () => {
 
     const handleDelete = (e) => {
         e.preventDefault();
-        axios.delete('http://localhost:8000/v1/delete-device/'+device_id)
-        .then(function (response) {
-            navigate("/view-devices");
+        swal({
+            title: "Are you sure?",
+            text: "You want to delete this device?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .then(willDelete => {
+            if(willDelete) {
+                axios.delete('http://localhost:8000/v1/delete-device/'+device_id)
+                    .then(function (response) {
+                        swal({
+                            title: "Done!",
+                            text: "Device was deleted",
+                            icon: "success",
+                            timer: 2000,
+                            button: false
+                          })
+                        navigate("/view-devices");
+        })
+
+            }
+        })   
     }
     
     return(
