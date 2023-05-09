@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 import json
-import jwt
-import hashlib, os
+import hashlib, pathlib
 from webserviceapp.models import Devices, Playlists, Files, Assign, Codes
 from django.views.decorators.csrf import csrf_exempt
 
@@ -195,6 +196,7 @@ def view_devices(request):
 
 
 def hash_file(filepath):
+    """It returns the hash of a file"""
     sha256_hash = hashlib.sha256()
     with open(filepath,"rb") as f:
         # Read and update hash string value in blocks of 4K
@@ -202,23 +204,44 @@ def hash_file(filepath):
             sha256_hash.update(byte_block)
     return sha256_hash.hexdigest()       
 
+
+def whatType(ext):
+    """Returns if an extension is a video or an image"""
+    if ext == '.mp4' or ext=='.mpeg4' or ext=='.avi' or ext=='.mov' or ext=='.wmv':
+        return "video"
+    elif ext=='.jpg' or ext=='.jpeg' or ext=='.png' or ext=='.gif' or ext=='.webp':
+        return "image"
+    else:
+        return 'Extension unknown'
+
+
+
 @csrf_exempt
 def add_file(request):
     """Add a new file to database"""
-
+    
     # Check if the method is POST
     if request.method != 'POST':
         return HttpResponse("Method Not Allowed", status=405)
-
-    data = json.loads(request.body) #it receives filename and type
-
+    elif request.method == 'POST' and request.FILES['file']:
+        uploaded_file = request.FILES['file']
+        fs = FileSystemStorage(location='../../media/')
+        filename = fs.save(uploaded_file.name, uploaded_file)
+        filename = fs.url(filename)
+        #print(uploaded_file.name)
+        file_extension = pathlib.Path(uploaded_file.name).suffix
+        #print("File Extension:", file_extension)
+   
     try:
         file = Files()
-        file.filename = data['filename']
-        file.type = data['type']
-        file.path = "../../media/"+file.filename
+        file.filename = uploaded_file.name
+        file.type = whatType(file_extension) #To know if it's a video or an image
+        file.path = "../../media/"+uploaded_file.name
         sha_code = hash_file(file.path)
-    
+        #print(file.filename)
+        #print(file.type)
+        #print(file.path)
+        #print(sha_code)
         # Check if the file is already registered    
         if Files.objects.filter(hash_file=sha_code).exists():
             return HttpResponse("The file already exists", status=409)
