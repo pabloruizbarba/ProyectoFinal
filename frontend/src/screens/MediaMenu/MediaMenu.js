@@ -24,7 +24,7 @@ const MediaMenu = () => {
 
     const onClickAddMedia= (e) => {
         e.preventDefault();
-        navigate("/home");
+        navigate("/add-media");
     }
 
     const onClickViewMedia= (e) => {

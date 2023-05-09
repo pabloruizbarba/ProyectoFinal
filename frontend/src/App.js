@@ -10,6 +10,7 @@ import NewPlaylist from './screens/NewPlaylist/NewPlaylist';
 import AddDevice from './screens/AddDevice/AddDevice';
 import ViewDevices from './screens/ViewDevices/ViewDevices';
 import ModifyDevice from './screens/ModifyDevice/ModifyDevice';
+import AddMedia from './screens/AddMedia/AddMedia';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/add-device" element={<AddDevice />}></Route>
       <Route path="/view-devices" element={<ViewDevices />}></Route>
       <Route path="/modify-device/:device_id" element={<ModifyDevice />}></Route>
+      <Route path="/add-media" element={<AddMedia />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
