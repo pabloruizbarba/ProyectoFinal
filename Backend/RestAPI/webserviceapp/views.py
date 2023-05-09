@@ -225,23 +225,22 @@ def add_file(request):
         return HttpResponse("Method Not Allowed", status=405)
     elif request.method == 'POST' and request.FILES['file']:
         uploaded_file = request.FILES['file']
+        # I indicate that files will be saved at 'media' folder:
         fs = FileSystemStorage(location='../../media/')
+        # The file is saved:
         filename = fs.save(uploaded_file.name, uploaded_file)
         filename = fs.url(filename)
-        #print(uploaded_file.name)
+        # I extract the extension from uploaded_file.name
         file_extension = pathlib.Path(uploaded_file.name).suffix
-        #print("File Extension:", file_extension)
-   
+
     try:
         file = Files()
         file.filename = uploaded_file.name
         file.type = whatType(file_extension) #To know if it's a video or an image
         file.path = "../../media/"+uploaded_file.name
+        # Get hash of the file:
         sha_code = hash_file(file.path)
-        #print(file.filename)
-        #print(file.type)
-        #print(file.path)
-        #print(sha_code)
+    
         # Check if the file is already registered    
         if Files.objects.filter(hash_file=sha_code).exists():
             return HttpResponse("The file already exists", status=409)
