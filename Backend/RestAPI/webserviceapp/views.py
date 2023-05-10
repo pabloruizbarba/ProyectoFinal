@@ -369,6 +369,7 @@ def view_files(request):
 
         for l in listTable:
             list = {
+                "id_file":l.id_file,
                 "filename":l.filename,
                 "type":l.type,
             }
