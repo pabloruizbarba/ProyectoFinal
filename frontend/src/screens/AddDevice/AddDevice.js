@@ -24,6 +24,11 @@ const AddDevice = () => {
         e.preventDefault();
         navigate("/home");
     }
+
+    const onClickBack= (e) => {
+        e.preventDefault();
+        navigate("/devices-menu");
+    }
     
     
     useEffect(() => {
@@ -128,6 +133,7 @@ const AddDevice = () => {
                         <input className="create-dev" type="submit" value="ADD" />
                     </form>
                 </div>
+                <input className="back-to-dm1" type="button" value="BACK" onClick={onClickBack}/>
             </div>
         </div>
     );

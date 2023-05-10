@@ -147,7 +147,7 @@ const ModifyDevice = () => {
                         </tr>
                         </tbody>
                     </table>
-                    <input className="back" type="button" value="BACK" onClick={onClickBack}/>
+                    <input className="back-to-vd" type="button" value="BACK" onClick={onClickBack}/>
                 </div>
                 
             </div>

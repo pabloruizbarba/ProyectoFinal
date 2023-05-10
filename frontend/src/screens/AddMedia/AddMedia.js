@@ -27,7 +27,10 @@ const AddMedia = () => {
         navigate("/home");
     }
 
-    
+    const onClickBack= (e) => {
+        e.preventDefault();
+        navigate("/media-menu");
+    }
 
     function handleChange(event) {
         setFile(event.target.files[0])
@@ -93,7 +96,7 @@ const AddMedia = () => {
         )}
 
                 </form>
-                
+                <input className="back-to-mm1" type="button" value="BACK" onClick={onClickBack}/>
             </div>
         </div>
     );

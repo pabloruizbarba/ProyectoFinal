@@ -91,3 +91,18 @@ table {
 
  .pencil:hover{cursor:pointer;}
 
+ .back-to-dm2{
+    margin-top: 2%;
+    margin-left:15vh;
+    width: 10%;
+    padding: 2%;
+    color: #FFFFFF;
+    background-color: #333333;
+    border-radius: 10px;
+ }
+
+ .back-to-dm2:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+ }
+

@@ -25,6 +25,11 @@ const NewPlaylist = () => {
         navigate("/home");
     }
 
+    const onClickBack= (e) => {
+        e.preventDefault();
+        navigate("/playlists-menu");
+    }
+
     const [formData, setFormData] = useState({
         title: ""
     });
@@ -66,6 +71,7 @@ const NewPlaylist = () => {
                         <input className="create" type="submit" value="CREATE" />
                     </form>
                 </div>
+                <input className="back-to-pm1" type="button" value="BACK" onClick={onClickBack}/>
             </div>
         </div>
     );

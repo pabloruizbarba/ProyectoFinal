@@ -29,6 +29,11 @@ const ViewDevices = () => {
         navigate("/home");
     }
 
+    const onClickBack= (e) => {
+        e.preventDefault();
+        navigate("/devices-menu");
+    }
+
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-devices/')
         .then(function(response) {
@@ -77,7 +82,7 @@ const ViewDevices = () => {
                         </tbody>
                     </table>
                 </div>
-                
+                <input className="back-to-dm2" type="button" value="BACK" onClick={onClickBack}/>
             </div>
         </div>
     );

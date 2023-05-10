@@ -91,4 +91,20 @@
 .name .code .id_playlist{
     text-align: center;
 }
+
 p{color: white;}
+
+.back-to-dm1{
+    margin-top: 2%;
+    margin-left:30vh;
+    width: 10%;
+    padding: 2%;
+    color: #FFFFFF;
+    background-color: #333333;
+    border-radius: 10px;
+ }
+
+ .back-to-dm1:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+ }
