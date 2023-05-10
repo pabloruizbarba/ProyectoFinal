@@ -273,7 +273,7 @@ def delete_file(request, file_id):
             file.delete()
             # Setting the path for the file
             filePath = pathlib.Path("../../media/"+file.filename)
-            # Calling the unlink method on the path
+            # Calling the unlink method on the path to delete file from folder
             filePath.unlink()
             return HttpResponse("Deleted successfully", status=200)
     except:
