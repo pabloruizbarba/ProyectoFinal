@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 import json
 import hashlib, pathlib
+from pathlib import Path
 from webserviceapp.models import Devices, Playlists, Files, Assign, Codes
 from django.views.decorators.csrf import csrf_exempt
 
@@ -227,11 +228,16 @@ def add_file(request):
         uploaded_file = request.FILES['file']
         # I indicate that files will be saved at 'media' folder:
         fs = FileSystemStorage(location='../../media/')
-        # The file is saved:
-        filename = fs.save(uploaded_file.name, uploaded_file)
-        filename = fs.url(filename)
-        # I extract the extension from uploaded_file.name
-        file_extension = pathlib.Path(uploaded_file.name).suffix
+        # Check if file exists in media folder:
+        filePath = Path("../../media/"+uploaded_file.name)
+        if filePath.is_file():
+            return HttpResponse("The file already exists", status=409)
+        else:
+            # The file is saved:
+            filename = fs.save(uploaded_file.name, uploaded_file)
+            filename = fs.url(filename)
+            # I extract the extension from uploaded_file.name
+            file_extension = pathlib.Path(uploaded_file.name).suffix
 
     try:
         file = Files()
@@ -240,12 +246,7 @@ def add_file(request):
         file.path = "../../media/"+uploaded_file.name
         # Get hash of the file:
         sha_code = hash_file(file.path)
-    
-        # Check if the file is already registered    
-        if Files.objects.filter(hash_file=sha_code).exists():
-            return HttpResponse("The file already exists", status=409)
-        else: 
-            file.hash_file=sha_code
+        file.hash_file=sha_code
         # Save file data into database
         file.save()
         return HttpResponse("File added to database", status=201)
