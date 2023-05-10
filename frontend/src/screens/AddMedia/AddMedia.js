@@ -8,7 +8,8 @@ import whiteLogo from "../../images/logos/logo.in.blanco.png"
 
 const AddMedia = () => {
     const navigate = useNavigate();
-    const [file, setFile] = useState()
+    const [file, setFile] = useState();
+    const [uploaded, setUploaded] = useState(null);
 
 
     const onClickDevices= (e) => {
@@ -38,7 +39,12 @@ const AddMedia = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        axios.post(url, formData).then((response) => {
+        axios.post(url, formData,{
+            onUploadProgress: (data) => {
+                setUploaded(Math.round((data.loaded / data.total) * 100));
+              },
+        })
+        .then((response) => {
             console.log(response.data);
             alert("File uploaded succesfully");
             navigate("/media-menu");
@@ -70,7 +76,24 @@ const AddMedia = () => {
                     <h1>Select a file:</h1>
                     <input className='search-file' type="file" onChange={handleChange}/>
                     <button className='submit-file' type="submit">Upload</button>
+
+                    {uploaded && (
+                        <div className="progress mt-2">
+                            <div
+                                className="progress-bar"
+                                role="progressbar"
+                                aria-valuenow={uploaded}
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style={{ width: `${uploaded}%` }}
+                            >
+                                {`${uploaded}%`}
+                            </div>
+                        </div>
+        )}
+
                 </form>
+                
             </div>
         </div>
     );
