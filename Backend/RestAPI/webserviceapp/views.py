@@ -271,6 +271,10 @@ def delete_file(request, file_id):
         else:
             # Delete row from table
             file.delete()
+            # Setting the path for the file
+            filePath = pathlib.Path("../../media/"+file.filename)
+            # Calling the unlink method on the path
+            filePath.unlink()
             return HttpResponse("Deleted successfully", status=200)
     except:
         return HttpResponse('Element not found', status=404) 
