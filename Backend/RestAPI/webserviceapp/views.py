@@ -347,7 +347,8 @@ def view_assigned_file(request,playlist_id):
             file=Files.objects.get(id_file = str(assign.id_file)[14:-1])
             answer = {
                 "id_playlist":playlist_id,
-                "title":file.filename,
+                "filename":file.filename,
+                "type":file.type,
             }
             answers.append(answer)
     except:
