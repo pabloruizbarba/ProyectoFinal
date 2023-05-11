@@ -11,6 +11,7 @@ import AddDevice from './screens/AddDevice/AddDevice';
 import ViewDevices from './screens/ViewDevices/ViewDevices';
 import ModifyDevice from './screens/ModifyDevice/ModifyDevice';
 import AddMedia from './screens/AddMedia/AddMedia';
+import ViewMedia from './screens/ViewMedia/ViewMedia';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/view-devices" element={<ViewDevices />}></Route>
       <Route path="/modify-device/:device_id" element={<ModifyDevice />}></Route>
       <Route path="/add-media" element={<AddMedia />}></Route>
+      <Route path="/view-media" element={<ViewMedia />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );

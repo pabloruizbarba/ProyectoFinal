@@ -1,0 +1,129 @@
+.main-container {
+    display: flex;
+    height:100vh;  
+}
+.left-home {
+    width: 30%;
+    height: 100%;
+    background-color: black;
+}
+.rigth-home {
+    width: 70%;
+    height: 100%;
+    background-color: white;
+}
+
+/* BUTTONS */
+.buttons-left{
+    position: relative;
+    text-align: center;
+    margin-top: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.buttons-left input{
+    margin-top: 5%;
+    width: 40%;
+    padding: 2%;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #333333;
+    border-radius: 10px;
+}
+
+.buttons-left input:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* LEFT IMAGE */
+.left-home img{
+    width:40%;
+    height:auto;
+    margin-top: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left-home img:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+}
+
+
+/* TABLE */
+thead {
+    position: sticky;
+    top: 0;
+    background-color: black;
+    color:white;
+}
+.table-div{
+    width:100vh;
+    height:60vh;
+    margin-top: 10vh;
+    margin-left:15vh;
+    overflow-y: scroll;
+}
+table {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #000;
+    background-color:#AFEEEE;
+ }
+ th, td {
+    width: 25%;
+    border: 1px solid #000;
+    border-spacing: 0;
+    padding: 0.3em;
+ }
+
+ .modify:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+ }
+
+ .pencil{
+    width:20px;
+    height: auto;
+ }
+
+ .pencil:hover{cursor:pointer;}
+
+
+
+.back-to-mm2{
+    margin-top: 2%;
+    margin-left:15vh;
+    width: 15%;
+    padding: 2%;
+    color: #FFFFFF;
+    background-color: #333333;
+    border-radius: 10px;
+ }
+
+ .back-to-mm2:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+ }
+
+ .play-video{
+    margin-top:5%;
+    margin-left:20vh;
+    width:70vh;
+    height:300px;
+    border: 3px solid red;
+ }
+
+.video-td{
+    height:auto;
+    width:auto;
+    text-align: center;
+}
+
+.thumbnail{
+    width:100%;
+    height:auto;
+}
