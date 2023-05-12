@@ -38,6 +38,8 @@ urlpatterns = [
     # Assign
     path('v1/assign-playlist/<int:device_id>', views.assign_playlist),
     path('v1/assign-file/<int:playlist_id>', views.assign_file),
+    #Unassign file
+    path('v1/unassign-file/<int:assign_id>', views.unassign_file),
     # Codes
     path('v1/add-code/', views.add_code),
 ]

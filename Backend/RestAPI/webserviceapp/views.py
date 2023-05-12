@@ -342,13 +342,15 @@ def view_assigned_file(request,playlist_id):
         for f in filesTable:
             assign=Assign()
             assign=Assign.objects.get(id_assign=f.id_assign)
-              
+
             file=Files()
             file=Files.objects.get(id_file = str(assign.id_file)[14:-1])
             answer = {
                 "id_playlist":playlist_id,
                 "filename":file.filename,
                 "type":file.type,
+                "duration":assign.duration,
+                "id_assign":assign.id_assign,
             }
             answers.append(answer)
     except:
@@ -401,3 +403,23 @@ def add_code(request):
         return HttpResponse("Code added", status=201)
     except:
         return HttpResponse('Bad request - Missed or incorrect params', status=400)  
+    
+
+@csrf_exempt
+def unassign_file(request, assign_id):
+    """Delete a file from a playlist"""
+
+    # Check if the method is DELETE
+    if request.method != 'DELETE':
+        return HttpResponse("Method Not Allowed", status=405)
+    
+    assign = Assign()
+    try:
+        #Search for playlist-id at the table
+        assign = Assign.objects.get(id_assign=assign_id)
+        
+        # Delete row from table
+        assign.delete()
+        return HttpResponse("Deleted successfully", status=200)
+    except:
+        return HttpResponse('Element not found', status=404)
