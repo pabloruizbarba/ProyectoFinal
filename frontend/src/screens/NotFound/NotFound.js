@@ -1,8 +1,23 @@
+import {useNavigate} from  "react-router-dom";
+import "./NotFound.css"
+
 const NotFound = () => {
-    <div className="container-notFound">
-        <h1>404 Error</h1>
-        <h2>Site not found</h2>
-    </div>
+    const navigate = useNavigate();
+
+    const onClickHome= (e) => {
+        e.preventDefault();
+        navigate("/home");
+    }
+
+    return(
+        <div className="lost">
+            <div className="words">
+                <h1>Oops! That url doesn't exist</h1>
+            </div>
+            <input className="home" type="button" value="HOME" onClick={onClickHome}/>
+        </div>  
+    );
+
 }
 
 export default NotFound;

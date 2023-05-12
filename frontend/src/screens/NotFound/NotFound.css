@@ -1,0 +1,28 @@
+.lost{
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height: 100vh;
+}
+
+.words{
+margin-top: 10%;
+margin-left: 32%;
+}
+
+.home{
+    width:200px;
+    height:50px;
+    margin-top: 4%;
+    margin-left: 45%;
+    background-color: #089c94;
+    color: white;
+    border-radius: 10%;
+}
+
+.home:hover{
+    transform: scale(1.1);
+    cursor:pointer;
+}
