@@ -41,8 +41,9 @@ const AddMedia = () => {
         const url = 'http://localhost:8000/v1/add-file/ ';
         const formData = new FormData();
         formData.append('file', file);
-
+        //Upload file to media directory
         axios.post(url, formData,{
+            // Progress percentage while file is being uploaded
             onUploadProgress: (data) => {
                 setUploaded(Math.round((data.loaded / data.total) * 100));
               },
@@ -53,6 +54,7 @@ const AddMedia = () => {
             navigate("/media-menu");
             })
             .catch(function (error) {
+                // Possible errors:
                 if( error.response.status === 409 ){
                     alert("The file already exists")
                 }

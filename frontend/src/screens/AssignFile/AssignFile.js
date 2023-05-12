@@ -35,7 +35,7 @@ const AssignFile = () => {
         e.preventDefault();
         navigate("/view-playlists");
     }
-
+    //View files assigned to a certain playlist
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-assigned-file/'+playlist_id)
         .then(function(response) {
@@ -43,7 +43,7 @@ const AssignFile = () => {
             setMedia(response.data)
         })
     })
-
+    // View all the files
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-files/')
         .then(function(response) {
@@ -72,7 +72,7 @@ const AssignFile = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-            
+        // Assign a file to a certain playlist  
         axios.post('http://localhost:8000/v1/assign-file/'+playlist_id, formData)
             .then(function (response) {
                 window.location.reload();
@@ -84,6 +84,7 @@ const AssignFile = () => {
 
 
         const handleDelete = (id_assign) => {
+            // Confirm before deleting a file from the playlist
             swal({
                 title: "Are you sure?",
                 text: "You want to unassign this media file?",
@@ -93,6 +94,7 @@ const AssignFile = () => {
             })
             .then(willDelete => {
                 if(willDelete) {
+                    // Deletes file from a playlist, but file stills exists in database and media directory. 
                     axios.delete('http://localhost:8000/v1/unassign-file/'+id_assign)
                         .then(function (response) { 
                             window.location.reload();
@@ -130,7 +132,7 @@ const AssignFile = () => {
                     <input className="addMF" type="submit" value="Add" />                        
                 </form> 
             </div>
-            <h1>Current media files:</h1>
+            <h1>Files in this playlist:</h1>
             <div className="table-div-af">
                     <table>
                         <thead>
@@ -139,7 +141,7 @@ const AssignFile = () => {
                             <th>Type</th>
                             <th>Duration</th>
                             <th>Preview</th>
-                            <th>Unassign media</th>
+                            <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -33,7 +33,7 @@ const NewPlaylist = () => {
     const [formData, setFormData] = useState({
         title: ""
     });
-
+    // formData only contains title
     const onchangeTitle = (e) => {
         setFormData({
             title: e.target.value,
@@ -46,9 +46,11 @@ const NewPlaylist = () => {
         axios.post('http://localhost:8000/v1/add-playlist/', formData)
           .then(function (response) {
             alert("Playlist added succesfully");
+            //Go back to the menu
             navigate("/playlists-menu");
           })
           .catch(function (error) {
+            //Title already in use
             alert("Try a different title");
             console.log(error);
           });

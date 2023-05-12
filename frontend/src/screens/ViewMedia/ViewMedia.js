@@ -32,7 +32,7 @@ const ViewMedia = () => {
         e.preventDefault();
         navigate("/media-menu");
     }
-
+    // View all files 
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-files/')
         .then(function(response) {
@@ -42,6 +42,7 @@ const ViewMedia = () => {
     
       
     const handleDelete = (id_file) => {
+        //Confirm before delete
         swal({
             title: "Are you sure?",
             text: "You want to delete this media file?",
@@ -51,17 +52,12 @@ const ViewMedia = () => {
         })
         .then(willDelete => {
             if(willDelete) {
+                //Delete file
                 axios.delete('http://localhost:8000/v1/delete-file/'+id_file)
                     .then(function (response) {
-                        swal({
-                            title: "Done!",
-                            text: "Media was deleted",
-                            icon: "success",
-                            timer: 2000,
-                            button: false
-                          })
-                        navigate("/media-menu");
-        })
+                        //Refresh page to see changes
+                        window.location.reload();
+                })
 
             }
         })   

@@ -62,10 +62,10 @@ thead {
 }
 .table-div{
     width:100vh;
-    height:60vh;
+    min-height:60vh;
     margin-top: 10vh;
     margin-left:15vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 table {
     width: 100%;

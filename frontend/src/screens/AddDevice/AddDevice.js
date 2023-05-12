@@ -30,7 +30,7 @@ const AddDevice = () => {
         navigate("/devices-menu");
     }
     
-    
+    //To view all the playlists
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-playlists/')
         .then(function(response) {
@@ -86,13 +86,14 @@ const AddDevice = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+        // Add a device:
         axios.post('http://localhost:8000/v1/add-device/', formData)
             .then(function (response) {
             alert("Device added succesfully");
             navigate("/devices-menu");
             })
             .catch(function (error) {
+                //Possible errors:
                 if( error.response.status === 409 ){
                     alert("Name already exists")
                 }

@@ -39,14 +39,14 @@ const ModifyDevice = () => {
         e.preventDefault();
         navigate("/view-devices");
     }
-
+    // Get playlist assigned to a device
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-assigned-playlist/'+device_id)
         .then(function (response) {
             setSearchedPlaylist(response.data)
         })
     });
-
+    // Get all the playlists
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-playlists/')
         .then(function(response) {
@@ -67,7 +67,7 @@ const ModifyDevice = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-            
+        // Assigns a playlist to a device    
         axios.post('http://localhost:8000/v1/assign-playlist/'+device_id, formData)
             .then(function (response) {
                 navigate("/modify-device/"+device_id);
@@ -80,6 +80,7 @@ const ModifyDevice = () => {
 
     const handleDelete = (e) => {
         e.preventDefault();
+        // Confirm before delete
         swal({
             title: "Are you sure?",
             text: "You want to delete this device?",
@@ -91,6 +92,7 @@ const ModifyDevice = () => {
             if(willDelete) {
                 axios.delete('http://localhost:8000/v1/delete-device/'+device_id)
                     .then(function (response) {
+                        // Tells that delete was successfull
                         swal({
                             title: "Done!",
                             text: "Device was deleted",
@@ -99,7 +101,7 @@ const ModifyDevice = () => {
                             button: false
                           })
                         navigate("/view-devices");
-        })
+                })
 
             }
         })   

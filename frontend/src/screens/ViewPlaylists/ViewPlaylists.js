@@ -34,7 +34,7 @@ const ViewPlaylists = () => {
         e.preventDefault();
         navigate("/playlists-menu");
     }
-
+    // Get all playlists
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-playlists/')
         .then(function(response) {
@@ -45,6 +45,7 @@ const ViewPlaylists = () => {
 
 
     const handleDelete = (id_playlist) => {
+        // Confirm before delete
         swal({
             title: "Are you sure?",
             text: "You want to delete this playlist?",
@@ -56,6 +57,7 @@ const ViewPlaylists = () => {
             if(willDelete) {
                 axios.delete('http://localhost:8000/v1/delete-playlist/'+id_playlist)
                     .then(function (response) {
+                        //Refresh page to see changes
                         window.location.reload();
                 })
 

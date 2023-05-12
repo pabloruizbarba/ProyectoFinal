@@ -60,7 +60,7 @@ def add_playlist(request):
     try:
         playlist = Playlists() 
         playlist.title = data['title']
-
+        # Encrypt title
         sha_code = encrypt_string(playlist.title)
         
         # Check if the playlist is already registered
@@ -69,7 +69,7 @@ def add_playlist(request):
             return HttpResponse("The playlist already exists", status=409)
         else: 
             playlist.hash_list=sha_code
-
+        # Save playlist
         playlist.save()
         return HttpResponse("Device created", status=201)
     except:
@@ -88,7 +88,9 @@ def assign_playlist(request,device_id):
     try:
         device = Devices()
         device = Devices.objects.get(id_device=device_id)
+        # We want id_playlist:
         device.id_playlist=Playlists.objects.get(id_playlist=data["id_playlist"])
+        # Save
         device.save()
         return HttpResponse("Playlist assigned to device", status=201)
     except:
@@ -150,7 +152,7 @@ def view_playlists(request):
     
     try:
         listTable = Playlists.objects.all()
-        lists = []
+        lists = [] #Will contain all the lists
 
         for l in listTable:
             list = {
@@ -158,7 +160,7 @@ def view_playlists(request):
                 "title":l.title,
                 "hash_list":l.hash_list,
             }
-
+            # Add to lists
             lists.append(list)
     
     except:
@@ -187,7 +189,7 @@ def view_devices(request):
                 "description":s.description,
                 "id_playlist":str(s.id_playlist)[18:-1] if s.id_playlist else "",
             }
-
+            # Add to screens
             screens.append(screen)
     
     except:
@@ -310,11 +312,9 @@ def view_assigned_playlist(request,device_id):
     
     try:
         dev=Devices()
-        
         dev= Devices.objects.get(id_device=device_id)
-        print(dev.id_device)
         id_pl=str(dev.id_playlist)[18:-1]
-        print(id_pl)
+   
       
         play=Playlists()
         play=Playlists.objects.get(id_playlist = id_pl)
@@ -352,6 +352,7 @@ def view_assigned_file(request,playlist_id):
                 "duration":assign.duration,
                 "id_assign":assign.id_assign,
             }
+            #Add to answers
             answers.append(answer)
     except:
         return HttpResponse("Not found", status=404)
@@ -376,7 +377,7 @@ def view_files(request):
                 "filename":l.filename,
                 "type":l.type,
             }
-
+            # Add to lists
             lists.append(list)
     
     except:
@@ -398,7 +399,7 @@ def add_code(request):
     try:
         cod = Codes() 
         cod.code = data['code']
-
+        # Save code
         cod.save()
         return HttpResponse("Code added", status=201)
     except:

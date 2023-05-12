@@ -33,7 +33,7 @@ const ViewDevices = () => {
         e.preventDefault();
         navigate("/devices-menu");
     }
-
+    // Get all devices
     useEffect(() => {
         axios.get('http://localhost:8000/v1/view-devices/')
         .then(function(response) {
