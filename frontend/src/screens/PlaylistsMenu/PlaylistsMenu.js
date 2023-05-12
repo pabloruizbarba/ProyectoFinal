@@ -29,7 +29,7 @@ const PlaylistsMenu = () => {
 
     const onClickViewPlay= (e) => {
         e.preventDefault();
-        navigate("/home");
+        navigate("/view-playlists");
     }
 
     return(
