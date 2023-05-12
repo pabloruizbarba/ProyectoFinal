@@ -43,6 +43,8 @@ paths:
               description: Bad Request - Forget or incorrect params
             '409':
               description: Filename already exists
+            '405':
+              description: Method not allowed
   
   
   /v1/add-playlist:
@@ -71,6 +73,8 @@ paths:
               description: Bad Request - Forget or incorrect params
             '409':
               description: playlist already exists
+            '405':
+              description: Method not allowed
   
   /v1/add-device:
     post:
@@ -103,8 +107,33 @@ paths:
             '400':
               description: Bad Request - Forget or incorrect params
             '409':
-              description: Device already exists            
-  /v1/assign-file:
+              description: Device already exists
+            '405':
+              description: Method not allowed
+              
+  /v1/add-code:
+    post:
+      tags:
+        - codes
+      summary: add a code
+      description: add a code
+      parameters: 
+        - name: code
+          in: query
+          description: The code to be registered
+          required: true
+          schema: 
+            type: string
+      responses:
+            '201':
+              description: Created
+            '400':
+              description: Bad Request - Missed or incorrect params
+            '405':
+              description: Method not allowed              
+              
+              
+  /v1/assign-file/{id_playlist}:
     post:
       tags:
         - assign file to playlist
@@ -112,7 +141,7 @@ paths:
       description: add a file to a playlist
       parameters: 
         - name: id_playlist
-          in: query
+          in: path
           description: ID of the playlist
           required: true
           schema: 
@@ -136,8 +165,10 @@ paths:
               description: Bad Request - Forget or incorrect params
             '409':
               description: Already assigned
+            '405':
+              description: Method not allowed
   
-  /v1/assign-playlist:
+  /v1/assign-playlist/{id_device}:
     post:
       tags:
         - assign playlist to device
@@ -145,7 +176,7 @@ paths:
       description: add a playlist to a device
       parameters: 
         - name: id_device
-          in: query
+          in: path
           description: ID of the device
           required: true
           schema: 
@@ -162,7 +193,9 @@ paths:
             '400':
               description: Bad Request - Forget or incorrect params
             '409':
-              description: Already assigned 
+              description: Already assigned
+            '405':
+              description: Method not allowed
       
   /v1/view-devices:
     get:
@@ -179,6 +212,8 @@ paths:
                     $ref: '#/components/schemas/Show-devices' 
             '404':
               description: Not found
+            '405':
+              description: Method not allowed
               
   /v1/view-files:
     get:
@@ -195,6 +230,8 @@ paths:
                     $ref: '#/components/schemas/Show-files' 
             '404':
               description: Not found
+            '405':
+              description: Method not allowed
               
   /v1/view-playlists:
     get:
@@ -210,7 +247,9 @@ paths:
                   schema:
                     $ref: '#/components/schemas/Show-playlists' 
             '404':
-              description: Not found   
+              description: Not found
+            '405':
+              description: Method not allowed
               
   /v1/view-assigned-file/{id_playlist}:
     get:
@@ -233,7 +272,9 @@ paths:
                   schema:
                     $ref: '#/components/schemas/Show-assigned-file' 
             '404':
-              description: Not found    
+              description: Not found   
+            '405':
+              description: Method not allowed
               
   /v1/view-assigned-playlist/{id_device}:
     get:
@@ -256,7 +297,9 @@ paths:
                   schema:
                     $ref: '#/components/schemas/Show-assigned-playlist' 
             '404':
-              description: Not found            
+              description: Not found
+            '405':
+              description: Method not allowed
           
   /v1/delete-file/{id_file}:
     delete:
@@ -276,6 +319,8 @@ paths:
               description: deleted succesfully
             '404':
               description: Not found
+            '405':
+              description: Method not allowed
               
   /v1/delete-playlist/{id_playlist}:
     delete:
@@ -295,6 +340,8 @@ paths:
               description: deleted succesfully
             '404':
               description: Not found
+            '405':
+              description: Method not allowed
   
   /v1/delete-device/{id_device}:
     delete:
@@ -313,7 +360,31 @@ paths:
             '200':
               description: deleted succesfully
             '404':
-              description: Not found  
+              description: Not found
+            '405':
+              description: Method not allowed
+              
+  /v1/unassign-file/{id_assign}:
+    delete:
+      tags: 
+        - files
+      summary: Delete file from a playlist
+      description: Delete file from a playlist
+      parameters:
+        - name:  id_assign
+          in: path
+          description: ID of assignment to be deleted
+          required: true
+          schema: 
+            type: integer
+      responses:
+            '200':
+              description: deleted succesfully
+            '404':
+              description: Not found
+            '405':
+              description: Method not allowed
+              
     
 components:
   schemas:
@@ -346,6 +417,19 @@ components:
           title:
             type: string
             example: "Sample playlist"
+    Show-codes:
+      type: array
+      items:
+        type: object
+        properties:
+          id_code:
+            type: integer
+            format: int64
+            example: 4
+          code:
+            type: string
+            example: "ABC123"
+
             
     Show-assigned-file:
       type: array

@@ -1,23 +1,3 @@
--- MariaDB dump 10.19  Distrib 10.6.12-MariaDB, for debian-linux-gnu (x86_64)
---
--- Host: localhost    Database: Player
--- ------------------------------------------------------
--- Server version	10.6.12-MariaDB-0ubuntu0.22.04.1
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `Assign`
---
 
 DROP TABLE IF EXISTS `Assign`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -148,14 +128,24 @@ LOCK TABLES `Playlists` WRITE;
 INSERT INTO `Playlists` VALUES (1,'test_list','asdfghjklzxcvb'),(2,'test_list2','ee802894c1aea3c7442932ffe7248ef7390a05e2a7804b1f7c95cdaa8e8d9387'),(3,'test_list3','0bc8bac843719665d07b6275718ca4d27daab8820beea67540cc255bb91de9f9'),(4,'test_list4','93eea4eee513ef268a7764000dc77bc0d0c8d1f58c48f028a5d9cfb438ff0be2'),(6,'test_list5','d99f489d9ea9b10066d9341c33c454ae8085246b52d0fc1ca9fd10c7b9b20a71'),(10,'test_list6','ede379e802a9e7c78c8597edf315980c438c046088ea828eaec076c365120b7a'),(11,'test_list7','c9dac54847ba674a07a3049a1ff64caf6663971241ca3ea8a1994f65ad39b696'),(12,'test_list8','bd9a8c27f0c749b6f7eb7558d5d6e40895dae70af6dc12973c695ff900e5a5db'),(13,'test_list9','31c64041367fa5cfa8ce49ec3351667bfa0584df46cf2c5612c1fd940c01113f'),(14,'test_list10','3e17abf576e395cb25620ecbefe672e26d0112ebb5e63689342dc753d7ad1b5a');
 /*!40000 ALTER TABLE `Playlists` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-04 12:09:51
+
+--==============================================================================================================================
+--==============================================================================================================================
+--*********************************SOME SAMPLE INSERTIONS***********************************************************************
+--==============================================================================================================================
+--==============================================================================================================================
+
+
+INSERT INTO `Codes` (code) VALUES ('AAA111');
+INSERT INTO `Codes` (code) VALUES ('AAA222');
+INSERT INTO `Codes` (code) VALUES ('AAA333');
+
+INSERT INTO `Playlists` (title) VALUES ('test1');
+INSERT INTO `Playlists` (title) VALUES ('test2');
+INSERT INTO `Playlists` (title) VALUES ('test3');
+
+INSERT INTO `Devices` (name,code,id_playlist,description) VALUES ('screen1','AAA111',1,'test screen 1');
+INSERT INTO `Devices` (name,code,id_playlist,description) VALUES ('screen2','AAA222',2,'test screen 2');
+INSERT INTO `Devices` (name,code,id_playlist,description) VALUES ('screen3','AAA333',3,'test screen 3');
