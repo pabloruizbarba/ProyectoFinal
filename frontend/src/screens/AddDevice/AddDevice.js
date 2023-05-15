@@ -119,7 +119,7 @@ const AddDevice = () => {
                 <div className="form-div-dev">
                     <form className="add_dev_form" onSubmit={handleSubmit}>
                         <input className="name" type="text" placeholder="NAME*" onChange={onchangeName}/>
-                        <input className="code" type="text" placeholder="CODE*" onChange={onchangeCode}/>
+                        <input className="code" type="text" placeholder="CODE*" maxlength="6" onChange={onchangeCode}/>
                         <textarea className="desc" type="text" placeholder="DESCRIPTION (OPTIONAL)" onChange={onchangeDesc}/>
                         <p>Select a playlist (optional):</p>
                         <select className="id_playlist" onChange={onOptionChange}>
