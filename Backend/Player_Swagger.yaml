@@ -130,7 +130,9 @@ paths:
             '400':
               description: Bad Request - Missed or incorrect params
             '405':
-              description: Method not allowed              
+              description: Method not allowed 
+            '409':
+              description: The code already exists             
               
               
   /v1/assign-file/{id_playlist}:

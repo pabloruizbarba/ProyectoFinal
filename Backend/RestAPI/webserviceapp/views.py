@@ -399,9 +399,13 @@ def add_code(request):
     try:
         cod = Codes() 
         cod.code = data['code']
-        # Save code
-        cod.save()
-        return HttpResponse("Code added", status=201)
+        if Codes.objects.filter(code=data['code']).exists():
+            return HttpResponse("The code already exists", status=409)
+        else: 
+            cod.code = data['code']
+            # Save code
+            cod.save()
+            return HttpResponse("Code added", status=201)
     except:
         return HttpResponse('Bad request - Missed or incorrect params', status=400)  
     
