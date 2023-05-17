@@ -1,0 +1,55 @@
+====== ADD ============================================================================================================================
+
+Add a code:
+curl -X POST localhost:8000/v1/add-code/ -H 'Content-Type: application/json' -d '{"code":"AAABBB"}'
+
+Add a device:
+curl -X POST localhost:8000/v1/add-device/ -H 'Content-Type: application/json' -d '{"name":"prueba", "code":"BBBAAA", "id_playlist":"1", "description":"giant screen"}'
+
+Add a playlist:
+curl -X POST localhost:8000/v1/add-playlist/ -H 'Content-Type: application/json' -d '{"title":"test_list2"}'
+
+Add a file:
+curl -X POST localhost:8000/v1/add-file/ -H 'Content-Type: application/json' -d '{"filename":"soldier.mp4", "type":"video"}'
+Este curl ya no es válido, porque ahora los archivos se guardan en una carpeta y en la base de datos solo algunos datos. Hay que 
+subir el archivo directamente desde el frontend, haciendo click en examinar y seleccionando el archivo.
+
+=====DELETE============================================================================================================================
+
+Delete a playlist:
+curl -X DELETE localhost:8000/v1/delete-playlist/1
+
+Delete a device:
+curl -X DELETE localhost:8000/v1/delete-device/7
+
+Delete a file:
+curl -X DELETE localhost:8000/v1/delete-file/7
+
+=====VIEW==============================================================================================================================
+
+View playlists:
+curl -X GET localhost:8000/v1/view-playlists/
+
+View devices:
+curl -X GET localhost:8000/v1/view-devices/
+
+View files:
+curl -X GET localhost:8000/v1/view-files/
+
+View playlist assigned to a device:
+curl -X GET localhost:8000/v1/view-assigned-playlist/1 
+
+view files assigned to a playlist:
+curl -X GET localhost:8000/v1/view-assigned-file/2
+
+=====ASSIGN============================================================================================================================
+
+Assign a playlist to a device:
+curl -X POST localhost:8000/v1/assign-playlist/9 -H 'Content-Type: application/json' -d '{"id_playlist":"4"}'
+
+Assign a file to a playlist:
+curl -X POST localhost:8000/v1/assign-file/3 -H 'Content-Type: application/json' -d '{"id_file":"4", "duration":"4"}'
+
+Unassign a file from the playlist:
+curl -X DELETE localhost:8000/v1/unassign-file/9
+
