@@ -89,6 +89,11 @@ python3 manage.py inspectdb > webserviceapp/models.py
 ```
 En caso de no tenerlas, también habrá que instalar mediante el comando pip
 todas las librerías importadas en el archivo views.py.
+Seguramente será necesario instalar la libreria moviepy, para ello utilizaremos
+el siguiente comando:
+```sh
+pip install moviepy
+```
 
 ## Frontend
 Una vez clonado el repositorio, desde la terminal nos situamos en la carpeta 
