@@ -19,8 +19,8 @@ Copiamos la dirección URL del repositorio.
 - Para clonar el repositorio mediante una clave SSH, incluido un certificado 
 emitido por la entidad de certificación SSH de la organización, hacemos clic en 
 Usar SSH y luego en copiar.
--Para clonar un repositorio mediante GitHub CLI, hacemos clic en GitHub CLI y, 
-después, haz clic en copiar.
+- Para clonar un repositorio mediante GitHub CLI, hacemos clic en GitHub CLI y, 
+después, hacemos clic en copiar.
 
 Abrimos el terminal.Cambiamos el directorio de trabajo actual a la ubicación 
 en donde queramos clonar el repositorio. Escribimos git clone y pegamos la 
