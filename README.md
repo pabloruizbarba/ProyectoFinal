@@ -87,6 +87,8 @@ situados en el mismo directorio que manage.py, escribimos:
 ```sh
 python3 manage.py inspectdb > webserviceapp/models.py
 ```
+En caso de no tenerlas, también habrá que instalar mediante el comando pip
+todas las librerías importadas en el archivo views.py.
 
 ## Frontend
 Una vez clonado el repositorio, desde la terminal nos situamos en la carpeta 

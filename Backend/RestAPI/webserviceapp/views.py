@@ -7,6 +7,7 @@ import hashlib, pathlib
 from pathlib import Path
 from webserviceapp.models import Devices, Playlists, Files, Assign, Codes
 from django.views.decorators.csrf import csrf_exempt
+from moviepy.editor import VideoFileClip
 
 @csrf_exempt
 def add_device(request):
@@ -295,7 +296,13 @@ def assign_file(request,playlist_id):
         assign = Assign()
         assign.id_playlist=Playlists.objects.get(id_playlist=playlist_id)
         assign.id_file=Files.objects.get(id_file=data["id_file"])
-        assign.duration=data["duration"] if "duration" in data else None
+        file=Files()
+        file=Files.objects.get(id_file=data["id_file"])
+        if file.type=="video":
+            clip = VideoFileClip(file.path)
+            assign.duration=clip.duration
+        else:    
+            assign.duration=data["duration"] if "duration" in data else None
         assign.save()
         return HttpResponse("Playlist assigned to device", status=201)
     except:
