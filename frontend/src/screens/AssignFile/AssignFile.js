@@ -158,7 +158,7 @@ const AssignFile = () => {
                                                 </video>
                                             </td>
                                             <td>
-                                                <img className="paperbin" src={paperbin} alt="paperbin" title="Delete this file from the playlist"></img>    
+                                                <img className="paperbin" src={paperbin} alt="paperbin" title="Delete this file from the playlist" onClick={() => handleDelete(file.id_assign)}></img>    
                                             </td>
                                         </tr>
                                     ) 
