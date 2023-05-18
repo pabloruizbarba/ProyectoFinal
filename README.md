@@ -119,7 +119,7 @@ Y a continuación volvemos a lanzar el servidor Django.
 Una vez hecho, desde otra terminal, nos situamos en la carpeta frontend 
 y tecleamos:
 ```sh
-npm run star
+npm run start
 ```
 Si no sucede nada raro, debería abrirse una ventana de nuestro navegador web
 con la página de inicio del sitio web.
