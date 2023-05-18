@@ -302,7 +302,7 @@ def assign_file(request,playlist_id):
             clip = VideoFileClip(file.path)
             assign.duration=clip.duration
         else:    
-            assign.duration=data["duration"] if "duration" in data else None
+            assign.duration=data["duration"]
         assign.save()
         return HttpResponse("Playlist assigned to device", status=201)
     except:
