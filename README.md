@@ -74,6 +74,10 @@ A continuación instalamos el paquete pymysql:
 ```sh
 $ pip3 install pymysql
 ```
+Para instalar django:
+```sh
+apt install python3-django
+```
 Para importar la base de datos, nos situaremos en el directorio en el que se 
 encuentra el archivo manage.py y usaremos los siguientes comandos:
 ```sh
@@ -92,7 +96,7 @@ todas las librerías importadas en el archivo views.py.
 Seguramente será necesario instalar la libreria moviepy, para ello utilizaremos
 el siguiente comando:
 ```sh
-pip install moviepy
+pip3 install moviepy
 ```
 
 ## Frontend
