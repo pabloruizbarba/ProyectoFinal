@@ -95,7 +95,7 @@ const ViewMedia = () => {
                                             <td>{file.type}</td>
                                             <td className="video-td">
                                                 <video width="300" height="200" controls >
-                                                    <source src={`/media/${file.filename}`}  type="video/mp4"/>  
+                                                    <source src={`http://localhost:8000/media/${file.filename}`}  type="video/mp4"/>  
                                                 </video>
                                             </td>
                                             <td>
@@ -109,7 +109,7 @@ const ViewMedia = () => {
                                             <td><b>{file.filename}</b></td>
                                             <td>{file.type}</td>
                                             <td className="video-td">
-                                                <img className="thumbnail" src={`/media/${file.filename}`}  alt="thumbnail"></img>  
+                                                <img className="thumbnail" src={`http://localhost:8000/media/${file.filename}`}  alt="thumbnail"></img>  
                                             </td>
                                             <td>
                                                 <img className="paperbin" src={paperbin} alt="paperbin" title="Delete device" onClick={() => handleDelete(file.id_file)}></img>    

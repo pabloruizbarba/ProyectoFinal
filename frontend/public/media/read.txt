@@ -1,1 +1,0 @@
-When you upload a media file from the frontend it will be saved here

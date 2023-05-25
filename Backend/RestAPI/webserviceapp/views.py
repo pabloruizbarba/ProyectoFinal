@@ -230,9 +230,9 @@ def add_file(request):
     elif request.method == 'POST' and request.FILES['file']:
         uploaded_file = request.FILES['file']
         # I indicate that files will be saved at 'media' folder:
-        fs = FileSystemStorage(location='../../frontend/public/media/')
+        fs = FileSystemStorage(location='../RestAPI/media/')
         # Check if file exists in media folder:
-        filePath = Path("../../frontend/public/media/"+uploaded_file.name)
+        filePath = Path("../RestAPI/media/"+uploaded_file.name)
         if filePath.is_file():
             return HttpResponse("The file already exists", status=409)
         else:
@@ -246,7 +246,7 @@ def add_file(request):
         file = Files()
         file.filename = uploaded_file.name
         file.type = whatType(file_extension) #To know if it's a video or an image
-        file.path = "../../frontend/public/media/"+uploaded_file.name
+        file.path = "../RestAPI/media/"+uploaded_file.name
         # Get hash of the file:
         sha_code = hash_file(file.path)
         file.hash_file=sha_code
@@ -275,7 +275,7 @@ def delete_file(request, file_id):
             # Delete row from table
             file.delete()
             # Setting the path for the file
-            filePath = pathlib.Path("../../frontend/public/media/"+file.filename)
+            filePath = pathlib.Path("../RestAPI/media/"+file.filename)
             # Calling the unlink method on the path to delete file from folder
             filePath.unlink()
             return HttpResponse("Deleted successfully", status=200)

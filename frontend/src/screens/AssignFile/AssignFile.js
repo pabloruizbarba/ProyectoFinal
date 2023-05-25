@@ -154,7 +154,7 @@ const AssignFile = () => {
                                             <td>{`${file.duration} seconds`}</td>
                                             <td className="video-td">
                                                 <video width="300" height="200" controls >
-                                                    <source src={`/media/${file.filename}`}  type="video/mp4"/>  
+                                                    <source src={`http://localhost:8000/media/${file.filename}`}  type="video/mp4"/>  
                                                 </video>
                                             </td>
                                             <td>
@@ -169,7 +169,7 @@ const AssignFile = () => {
                                             <td>{file.type}</td>
                                             <td>{`${file.duration} seconds`}</td>
                                             <td className="video-td">
-                                                <img className="thumbnail" src={`/media/${file.filename}`}  alt="thumbnail"></img>  
+                                                <img className="thumbnail" src={`http://localhost:8000/media/${file.filename}`}  alt="thumbnail"></img>  
                                             </td>
                                             <td>
                                                 <img className="icon" src={paperbin} alt="paperbin" title="Delete this file from the playlist" onClick={() => handleDelete(file.id_assign)}></img>    

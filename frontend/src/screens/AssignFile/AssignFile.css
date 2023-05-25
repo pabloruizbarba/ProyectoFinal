@@ -61,7 +61,7 @@ thead {
 }
 .table-div-af{
     width:100vh;
-    min-height:40vh;
+    max-height:35vh;
     margin-top: 2%;
     margin-left:15vh;
     overflow-y:auto; 
