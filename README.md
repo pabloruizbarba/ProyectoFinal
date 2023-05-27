@@ -1,4 +1,13 @@
 # Proyecto Final
+![Inusual](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2PJmeC-sRf9e8i6zvYAyM8CNEFxQxR5CygQ&usqp=CAU)
+
+Creado con:
+
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green) ![](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white) 
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) ![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+![VirtualBox](https://img.shields.io/badge/VirtualBox-21416b?style=for-the-badge&logo=VirtualBox&logoColor=white) ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white) 
+![Windows 11](https://img.shields.io/badge/Windows_11-0078d4?style=for-the-badge&logo=windows-11&logoColor=white)
+
 El presente proyecto consta de un backend realizado en Django,
 y un frontend realizado en React,
 Para ponerlo en funcionamiento necesitamos hacer 4 cosas:
@@ -7,7 +16,8 @@ Para ponerlo en funcionamiento necesitamos hacer 4 cosas:
 - Instalar lo necesario para ejecutar el código React.
 - Lanzamiento.
 
-Explicaré el procedimiento para Linux.
+Explicaré el procedimiento para Ubuntu, excepto el correspondiente
+al frontend, que lo explicaré para Windows.
 
 ## Clonar el repositorio
 En GitHub.com, navegamos a la página principal del repositorio. Encima de 
@@ -100,18 +110,17 @@ pip3 install moviepy
 ```
 
 ## Frontend
-Una vez clonado el repositorio, desde la terminal nos situamos en la carpeta 
-frontend de nuestro repositorio.
+Una vez clonado el repositorio, en caso de no tener node.js instalado, lo descargaremos
+desde https://nodejs.org/es y lo instalaremos, dando permisos y dejado las opciones por 
+defecto.
 
-Para instalar npm en linux, usamos el siguiente comando:
+A continuación, desde la terminal de Windows, nos situamos en la carpeta frontend 
+de nuestro repositorio.
+
+Para instalar npm, usamos el siguiente comando:
 ```sh
-$ sudo apt install npm
+npm install
 ``` 
-Y a continuación:
-```sh
-$ npm install
-```
-
 ## Lanzamiento
 
 Primero lanzaremos el servidor Django. Nos situamos en el mismo directorio
@@ -125,10 +134,11 @@ $ python -m pip3 install django-cors-headers
 ```
 Y a continuación volvemos a lanzar el servidor Django.
 
-Una vez hecho, desde otra terminal, nos situamos en la carpeta frontend 
+Una vez hecho, desde la terminal de Windows, nos situamos en la carpeta frontend
 y tecleamos:
 ```sh
 npm run start
 ```
 Si no sucede nada raro, debería abrirse una ventana de nuestro navegador web
 con la página de inicio del sitio web.
+
