@@ -133,6 +133,7 @@ const ModifyDevice = () => {
                             <td>
                                 <form className="selectPL_form" onSubmit={handleSubmit}>   
                                     <select className="select_playlist" onChange={onOptionChange}>
+                                            <option>Choose playlist</option>
                                             {playlists.map((playlist)=>{
                                                 return(
                                                     <option key={playlist.id_playlist} value={playlist.id_playlist}>{playlist.title}</option>

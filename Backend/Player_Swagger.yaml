@@ -110,6 +110,8 @@ paths:
               description: Device already exists
             '405':
               description: Method not allowed
+            '406':
+              description: The code is not valid
               
   /v1/add-code:
     post:
@@ -323,6 +325,8 @@ paths:
               description: Not found
             '405':
               description: Method not allowed
+            '409':
+              description: The file is being used
               
   /v1/delete-playlist/{id_playlist}:
     delete:
@@ -344,6 +348,8 @@ paths:
               description: Not found
             '405':
               description: Method not allowed
+            '409':
+              description: The playlist is being used
   
   /v1/delete-device/{id_device}:
     delete:

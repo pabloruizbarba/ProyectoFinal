@@ -120,6 +120,7 @@ const AssignFile = () => {
                 <form className="selectML_form" onSubmit={handleSubmit}> 
                     <label for="select_media">Select a media file:</label>           
                     <select id="select_media" className="select_media" onChange={onOptionChange}>
+                        <option>Choose a file</option>
                         {files.map((fl)=>{
                             return(
                                 <option key={fl.id_file} value={fl.id_file}>{fl.filename}</option>

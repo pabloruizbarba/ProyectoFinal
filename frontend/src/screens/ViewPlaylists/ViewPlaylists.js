@@ -59,8 +59,17 @@ const ViewPlaylists = () => {
                     .then(function (response) {
                         //Refresh page to see changes
                         window.location.reload();
-                })
-
+                    })
+                    .catch(function (error) {
+                        //Possible errors:
+                        if( error.response.status === 409 ){
+                            alert("The playlist is being used")
+                        }
+                        if( error.response.status === 404 ){
+                            alert("Playlist not found")
+                        }
+                        console.log(error);
+                    });
             }
         })   
     }
