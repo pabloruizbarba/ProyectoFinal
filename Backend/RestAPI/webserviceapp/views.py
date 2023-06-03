@@ -111,7 +111,7 @@ def delete_playlist(request, playlist_id):
          #Search for id_playlist at the table
         playlist = Playlists.objects.get(id_playlist=playlist_id)
         if Devices.objects.filter(id_playlist=playlist_id).exists():
-            return HttpResponse("The playlist is being used", status=404)
+            return HttpResponse("The playlist is being used", status=409)
         else:
             if Assign.objects.filter(id_playlist=playlist_id).exists():
                 #Delete the entries of this playlist at the Assign table:
@@ -270,7 +270,7 @@ def delete_file(request, file_id):
          #Search for id_file at the table
         file = Files.objects.get(id_file=file_id)
         if Assign.objects.filter(id_file=file_id).exists():
-            return HttpResponse("The file is being used", status=404)
+            return HttpResponse("The file is being used", status=409)
         else:
             # Delete row from table
             file.delete()
