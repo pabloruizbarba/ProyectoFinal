@@ -109,7 +109,7 @@ const ViewMedia = () => {
                                                 </video>
                                             </td>
                                             <td>
-                                                <img className="paperbin" src={paperbin} alt="paperbin" title="Delete device" onClick={() => handleDelete(file.id_file)}></img>    
+                                                <img className="paperbin" src={paperbin} alt="paperbin" title="Delete file" onClick={() => handleDelete(file.id_file)}></img>    
                                             </td>
                                         </tr>
                                     ) 
@@ -122,7 +122,7 @@ const ViewMedia = () => {
                                                 <img className="thumbnail" src={`http://localhost:8000/media/${file.filename}`}  alt="thumbnail"></img>  
                                             </td>
                                             <td>
-                                                <img className="paperbin" src={paperbin} alt="paperbin" title="Delete device" onClick={() => handleDelete(file.id_file)}></img>    
+                                                <img className="paperbin" src={paperbin} alt="paperbin" title="Delete file" onClick={() => handleDelete(file.id_file)}></img>    
                                             </td>
                                         </tr>
                                     )

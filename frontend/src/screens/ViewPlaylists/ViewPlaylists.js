@@ -106,7 +106,7 @@ const ViewPlaylists = () => {
                                             </Link>
                                         </td>
                                         <td>
-                                            <img className="icon" src={paperbin} alt="paperbin" title="Delete device" onClick={() => handleDelete(pl.id_playlist)}></img>
+                                            <img className="icon" src={paperbin} alt="paperbin" title="Delete playlist" onClick={() => handleDelete(pl.id_playlist)}></img>
                                         </td>
                                     </tr>
                                 )     
