@@ -39,7 +39,7 @@ const Home = () => {
                 </div> 
             </div>
             <div className="right-home">
-                <a href="https://www.inusualcom.com/" target="_blank" rel="noreferrer">
+                <a href="https://www.wikipedia.org/" target="_blank" rel="noreferrer">
                     <img 
                         className="greenLogo"
                         alt="Inusual" 
