@@ -1,5 +1,4 @@
 # Proyecto Final
-![Inusual](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2PJmeC-sRf9e8i6zvYAyM8CNEFxQxR5CygQ&usqp=CAU)
 
 Creado con:
 
@@ -141,4 +140,17 @@ npm run start
 ```
 Si no sucede nada raro, debería abrirse una ventana de nuestro navegador web
 con la página de inicio del sitio web.
+
+Para poder registrar una pantalla, antes deberemos de guardar un código en la
+base de datos mediante un curl, simulando lo que haría una pantalla real. De
+este modo, al registrar el dispositivo, comparará el código introducido en el
+formulario de registro con el previamente guardado en la base de datos.
+El curl a utilizar es:
+```sh
+curl -X POST localhost:8000/v1/add-code/ -H 'Content-Type: application/json' -d '{"code":"AAABBB"}'
+```
+En el que sustituiremos AAABBB por el código que deseemos guardar, siempre de 6 caracteres.
+
+Para probar la presente aplicación, se ha añadido una carpeta llamada SampleFiles, la cual contiene
+varios videos e imágenes. Estos archivos podrán subirse desde MEDIA FILES > ADD MEDIA FILE.
 
